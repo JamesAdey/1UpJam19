@@ -6,10 +6,10 @@ public class NavNode : MonoBehaviour
 {
 
     [SerializeField]
-    private List<NavNode> neighbours;
+    private List<NavNode> neighbours = new List<NavNode>();
     private Transform thisTransform;
 
-    public Vector3 position { get { return thisTransform.position; } }
+    public Vector3 Position { get { return thisTransform.position; } }
 
     // Start is called before the first frame update
     void Start()
@@ -43,9 +43,35 @@ public class NavNode : MonoBehaviour
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(transform.position, Vector3.one * 0.2f);
         foreach (NavNode node in neighbours)
         {
-            Gizmos.DrawLine(transform.position, node.transform.position);
+            if (node != null)
+            {
+                Gizmos.DrawLine(transform.position, node.transform.position);
+            }
+        }
+    }
+
+    public void VerifyNeighbours()
+    {
+        for (int i = neighbours.Count - 1; i >= 0; i--)
+        {
+            NavNode node = neighbours[i];
+            if (node == null)
+            {
+                neighbours.RemoveAt(i);
+            }
+            else if(node == this)
+            {
+                neighbours.RemoveAt(i);
+            }
+        }
+
+        foreach (NavNode node in neighbours)
+        {
+            node.Connect(this);
+            this.Connect(node);
         }
     }
 }

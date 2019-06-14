@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 public class NavMesh : MonoBehaviour
 {
     List<NavNode> nodes;
@@ -10,7 +12,7 @@ public class NavMesh : MonoBehaviour
 
     private void Awake()
     {
-        if(singleton == null)
+        if (singleton == null)
         {
             singleton = this;
         }
@@ -18,25 +20,27 @@ public class NavMesh : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(singleton == this)
+        if (singleton == this)
         {
             singleton = null;
         }
     }
 
+
+
     void StitchNodes(List<NavNode> newNodes)
     {
         foreach (NavNode oldNode in nodes)
         {
-            foreach(NavNode newNode in newNodes)
+            foreach (NavNode newNode in newNodes)
             {
                 // check for connection
-                if (Physics.Linecast(oldNode.position, newNode.position))
+                if (Physics.Linecast(oldNode.Position, newNode.Position))
                 {
                     oldNode.Connect(newNode);
                 }
             }
-            
+
         }
         foreach (NavNode node in newNodes)
         {
@@ -56,4 +60,16 @@ public class NavMesh : MonoBehaviour
             nodes.Remove(node);
         }
     }
+#if UNITY_EDITOR
+
+    [MenuItem("NavMesh/VerifyNeighbours")]
+    public static void VerifyNeighbours()
+    {
+        NavNode[] allNodes = GameObject.FindObjectsOfType<NavNode>();
+        foreach(NavNode node in allNodes)
+        {
+            node.VerifyNeighbours();
+        }
+    }
+#endif
 }
