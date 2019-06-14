@@ -35,7 +35,7 @@ public class NavMesh : MonoBehaviour
             foreach (NavNode newNode in newNodes)
             {
                 // check for connection
-                if (Physics.Linecast(oldNode.Position, newNode.Position))
+                if (!Physics.Linecast(oldNode.Position, newNode.Position))
                 {
                     oldNode.Connect(newNode);
                 }
