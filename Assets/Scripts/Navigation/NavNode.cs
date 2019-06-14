@@ -29,7 +29,7 @@ public class NavNode : MonoBehaviour
     public void Disconnect(NavNode other)
     {
         neighbours.Remove(other);
-        other.Disconnect(this);
+        other.neighbours.Remove(this);
     }
 
     public void DisconnectAll()
