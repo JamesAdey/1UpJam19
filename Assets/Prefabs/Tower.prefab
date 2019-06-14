@@ -417,6 +417,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f81e6c03062e7084f80058785fe2ab58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockingRadius: 0
+  nodes:
+  - {fileID: 581575401}
+  - {fileID: 671747010}
+  - {fileID: 477936764}
+  - {fileID: 236305329}
   bulletPrefab: {fileID: 7563192733671129351, guid: f5198efe543f6b245bd54f911ad3aae7,
     type: 3}
   shoot: {fileID: 5830228955390108202}
