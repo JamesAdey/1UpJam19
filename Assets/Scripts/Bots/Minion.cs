@@ -25,6 +25,7 @@ public class Minion : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        movementMap.Decay();
         chaseTowerBehaviour.Process(movementMap, this);
         desiredDir = movementMap.Evaluate();
         Vector3 vel = desiredDir * speed;

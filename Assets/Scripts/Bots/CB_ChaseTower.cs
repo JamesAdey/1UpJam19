@@ -34,7 +34,7 @@ public class CB_ChaseTower : ContextBehaviour<float>
 
         for(int i = 0; i < weights.Count; i++)
         {
-            float strength = 1 - (weights[i] / highest);
+            float strength = 1.01f - (weights[i] / highest);
             contextMap.WriteDirection(directions[i], strength);
         }
 
