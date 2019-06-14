@@ -280,6 +280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5830228955780306017}
   - component: {fileID: 5830228955780306030}
+  - component: {fileID: 2518146287914660373}
   - component: {fileID: 5830228955780306031}
   m_Layer: 2
   m_Name: ShootyBit
@@ -310,6 +311,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5830228955780306018}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2518146287914660373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5830228955780306018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 320b02b8f5243a74081de1ff48d87824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goodMaterial: {fileID: 2100000, guid: ed0a706e0f36d2842b521622229a89bb, type: 2}
+  badMaterial: {fileID: 2100000, guid: b392640523f00844a97efab69beef2e8, type: 2}
 --- !u!23 &5830228955780306031
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -327,7 +342,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 731b69deac44afd488911952cd78a904, type: 2}
+  - {fileID: 2100000, guid: ed0a706e0f36d2842b521622229a89bb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

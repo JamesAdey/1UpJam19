@@ -14,7 +14,7 @@ public abstract class BaseBuilding : MonoBehaviour
     [SerializeField]
     protected NavMesh navMesh; 
 
-    protected void SnapToMouse()
+    public void SnapToMouse()
     {
         Vector3 mousePos = input.lookPos;
         transform.position = mousePos;
