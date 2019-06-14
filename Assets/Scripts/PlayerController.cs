@@ -25,7 +25,8 @@ public class PlayerController : MonoBehaviour
         inputs = brain.GetInputs();
         thisRigid.velocity = new Vector3(inputs.forwardBackwardInput * speed, thisRigid.velocity.y, -inputs.leftRightInput * speed);
 
-        inputs.lookPos.y = thisTransform.position.y;
-        thisTransform.LookAt(inputs.lookPos);
+        Vector3 flattenedLookPos = inputs.lookPos;
+        flattenedLookPos.y = thisTransform.position.y;
+        thisTransform.LookAt(flattenedLookPos);
     }
 }
