@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public BaseBrain brain;
-    PlayerInput inputs;
+    public PlayerInput inputs;
 
     float speed = 5;
 
