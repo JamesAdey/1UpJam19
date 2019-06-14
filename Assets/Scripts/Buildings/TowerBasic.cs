@@ -19,9 +19,15 @@ public class TowerBasic : BaseBuilding
     [SerializeField]
     float shootTime = 1;
 
+    public void Awake()
+    {
+        blockingRadius = 4;
+    }
+
     private void Start()
     {
         navMesh.StitchNodes(nodes);
+        GameManager.manager.buildings.Add(gameObject);
     }
 
 

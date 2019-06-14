@@ -13,10 +13,14 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> buildings = new List<GameObject>();
 
+    private void Awake()
+    {
+        manager = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        manager = this;
 
         GameObject player = Instantiate(playerPrefab, new Vector3(0, 10, 0), Quaternion.identity);
         HumanBrain brain = player.GetComponent < HumanBrain >();
