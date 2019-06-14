@@ -30,7 +30,7 @@ public class HumanBrain : BaseBrain
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            Debug.Log(hit.point);
+            //Debug.Log(hit.point);
             // TODO check tag for buildable on hit
             inputs.lookPos = hit.point;
         }

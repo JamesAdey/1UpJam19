@@ -4,7 +4,10 @@ using UnityEngine;
 
 public abstract class BaseBuilding : MonoBehaviour
 {
+
+    [SerializeField]
     public float blockingRadius;
+
     public List<NavNode> nodes;
     public PlayerInput input;
 

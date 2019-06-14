@@ -1,0 +1,34 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GhostRenderer : MonoBehaviour
+{
+    [SerializeField]
+    Material goodMaterial;
+
+    [SerializeField]
+    Material badMaterial;
+
+    MeshRenderer render;
+
+    public void Awake()
+    {
+        render = GetComponent<MeshRenderer>();
+    }
+
+    public void SetMat(bool goodMat)
+    {
+        if (goodMat)
+        {
+            render.material = goodMaterial;
+        }
+        else
+        {
+            render.material = badMaterial;
+        }
+        
+    }
+
+
+}

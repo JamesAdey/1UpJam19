@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5830228954015435687}
   - component: {fileID: 5830228954015435704}
   - component: {fileID: 5830228954015435705}
+  - component: {fileID: 5368674422616233150}
   m_Layer: 2
   m_Name: ExtraBit
   m_TagString: Untagged
@@ -77,6 +78,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5368674422616233150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5830228954015435707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 320b02b8f5243a74081de1ff48d87824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goodMaterial: {fileID: 2100000, guid: ea7875b183e43874bacaf3c4e0fb4221, type: 2}
+  badMaterial: {fileID: 2100000, guid: b392640523f00844a97efab69beef2e8, type: 2}
 --- !u!1 &5830228954893830574
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,6 +103,7 @@ GameObject:
   - component: {fileID: 5830228954893830570}
   - component: {fileID: 5830228954893830571}
   - component: {fileID: 5830228954893830572}
+  - component: {fileID: 566731616960452293}
   m_Layer: 2
   m_Name: MainBit
   m_TagString: Untagged
@@ -154,6 +170,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &566731616960452293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5830228954893830574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 320b02b8f5243a74081de1ff48d87824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goodMaterial: {fileID: 2100000, guid: 7d6d83aac64e8814d9910a763720c0bd, type: 2}
+  badMaterial: {fileID: 2100000, guid: b392640523f00844a97efab69beef2e8, type: 2}
 --- !u!1 &5830228955307851746
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56103bfe5acd01d419ca353cc1590b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockingRadius: 0
+  blockingRadius: 5
   nodes: []
   input:
     walkDir: {x: 0, y: 0, z: 0}
