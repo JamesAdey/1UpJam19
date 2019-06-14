@@ -12,7 +12,7 @@ public class NavNode : MonoBehaviour
     public Vector3 Position { get { return thisTransform.position; } }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         thisTransform = GetComponent<Transform>();
     }

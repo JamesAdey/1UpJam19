@@ -25,8 +25,6 @@ public class HumanBrain : BaseBrain
     {
         inputs.leftRightInput = Input.GetAxisRaw("Horizontal");
         inputs.forwardBackwardInput = Input.GetAxisRaw("Vertical");
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = cam.nearClipPlane;
 
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;

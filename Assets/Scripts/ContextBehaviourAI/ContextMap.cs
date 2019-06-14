@@ -7,8 +7,7 @@ namespace ContextBehaviourAI
     [System.Serializable]
     public abstract class ContextMap<T>
     {
-        T[] slots;
+        protected T[] slots;
         public abstract void Init(int size);
-
     }
 }
