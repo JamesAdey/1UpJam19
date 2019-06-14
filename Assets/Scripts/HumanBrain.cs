@@ -8,18 +8,23 @@ public class HumanBrain : BaseBrain
     private PlayerInput inputs;
 
     [SerializeField]
-    private Camera cam;
+    public Camera cam;
 
     public override PlayerInput GetInputs()
     {
         return inputs;
     }
 
+    private void Start()
+    {
+        inputs = new PlayerInput();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        inputs.strafeInput = Input.GetAxisRaw("Horizontal");
-        inputs.walkInput = Input.GetAxisRaw("Vertical");
+        inputs.leftRightInput = Input.GetAxisRaw("Horizontal");
+        inputs.forwardBackwardInput = Input.GetAxisRaw("Vertical");
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = cam.nearClipPlane;
 

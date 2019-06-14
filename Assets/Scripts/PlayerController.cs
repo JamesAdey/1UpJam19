@@ -7,21 +7,23 @@ public class PlayerController : MonoBehaviour
     public BaseBrain brain;
     PlayerInput inputs;
 
+    float speed = 5;
+
     Transform thisTransform;
+    Rigidbody thisRigid;
 
     // Start is called before the first frame update
     void Start()
     {
         thisTransform = GetComponent<Transform>();
         brain = GetComponent<BaseBrain>();
+        thisRigid = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         inputs = brain.GetInputs();
-        Vector3 moveVect = new Vector3(inputs.strafeInput, 0, inputs.walkInput);
-        thisTransform.Translate(moveVect,Space.World);
+        thisRigid.velocity = new Vector3(inputs.forwardBackwardInput * speed, thisRigid.velocity.y, -inputs.leftRightInput * speed);
 
         inputs.lookPos.y = thisTransform.position.y;
         thisTransform.LookAt(inputs.lookPos);
