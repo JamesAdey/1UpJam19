@@ -21,6 +21,5 @@ public class TopDownCamera : MonoBehaviour
     {
         Vector3 desiredPos = target.position + offset;
         thisTransform.position = Vector3.Lerp(thisTransform.position, desiredPos, speed * Time.deltaTime);
-        thisTransform.LookAt(target);
     }
 }
