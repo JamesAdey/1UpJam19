@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PlayerInput
+[System.Serializable]
+public class PlayerInput
 {
-    
+    public float strafeInput;
+    public float walkInput;
+    public Vector3 lookPos;
 }
