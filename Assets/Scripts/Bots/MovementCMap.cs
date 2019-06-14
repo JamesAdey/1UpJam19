@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ContextBehaviourAI;
+using System;
 
-class MovementCMap : ContextMap<float>
+public class MovementCMap : ContextMap<float>
 {
     Vector3[] vectors;
     public override void Init(int size)
@@ -25,16 +26,23 @@ class MovementCMap : ContextMap<float>
         for (int i = 0; i < 8; i++)
         {
             float ang = Vector3.Angle(direction, vectors[i]);
-            float pow = 0;
             if (ang < 90)
             {
-                pow = (90 - ang) / 90;    // scale to 1 at 0, and 0 at 90 degrees
-                pow *= power;           // scale it by the power
+                float pow = (90.0f - ang);    // scale to 1 at 0, and 0 at 90 degrees
+                pow *= power/90;           // scale it by the power
                 if (slots[i] < pow)
                 {
                     slots[i] = pow;     // overwrite the slot if it's more power
                 }
             }
+        }
+    }
+
+    public void Decay()
+    {
+        for(int i = 0; i < slots.Length; i++)
+        {
+            slots[i] *= 0.5f;
         }
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class TopDownCamera : MonoBehaviour
 {
     [SerializeField]
-    Transform target;
+    public Transform target;
     [SerializeField]
     Vector3 offset;
     [SerializeField]
