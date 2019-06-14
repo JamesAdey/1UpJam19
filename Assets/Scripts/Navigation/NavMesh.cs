@@ -6,7 +6,7 @@ using UnityEditor;
 #endif
 public class NavMesh : MonoBehaviour
 {
-    List<NavNode> nodes;
+    List<NavNode> nodes = new List<NavNode>();
 
     public static NavMesh singleton;
 
@@ -28,7 +28,7 @@ public class NavMesh : MonoBehaviour
 
 
 
-    void StitchNodes(List<NavNode> newNodes)
+    public void StitchNodes(List<NavNode> newNodes)
     {
         foreach (NavNode oldNode in nodes)
         {
@@ -52,7 +52,7 @@ public class NavMesh : MonoBehaviour
         }
     }
 
-    void UnstitchNodes(List<NavNode> nodesToRemove)
+    public void UnstitchNodes(List<NavNode> nodesToRemove)
     {
         foreach (NavNode node in nodesToRemove)
         {

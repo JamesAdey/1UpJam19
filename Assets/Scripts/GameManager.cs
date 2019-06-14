@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> players = new List<GameObject>();
 
+    public List<GameObject> buildings = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
