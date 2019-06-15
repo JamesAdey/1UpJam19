@@ -35,6 +35,11 @@ public class HumanBrain : BaseBrain
             inputs.lookPos = hit.point;
         }
 
+        if (Input.GetKeyUp(KeyCode.B))
+        {
+            inputs.buildMode = true;
+        }
+
         inputs.primaryAttack = Input.GetMouseButton(0);
     }
 

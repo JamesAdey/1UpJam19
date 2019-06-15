@@ -11,5 +11,6 @@ public class PlayerInput
     public float forwardBackwardInput;
     public Vector3 lookPos;
     public bool primaryAttack;
+    public bool buildMode;
     
 }

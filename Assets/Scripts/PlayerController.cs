@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public enum Mode
+    {
+        GAME,
+        BUILD
+    }
+
+    public Mode myMode = Mode.GAME;
+
     public BaseBrain brain;
     public PlayerInput inputs;
     public GameObject bulletPrefab;
@@ -38,6 +46,24 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        switch (myMode)
+        {
+            case Mode.GAME:
+                GameUpdate();
+                break;
+            case Mode.BUILD:
+                BuildUpdate();
+                break;
+        }
+    }
+
+    private void BuildUpdate()
+    {
+
+    }
+
+    private void GameUpdate()
+    {
         inputs = brain.GetInputs();
         timeSinceShoot += Time.deltaTime;
         thisRigid.velocity = new Vector3(inputs.forwardBackwardInput * speed, thisRigid.velocity.y, -inputs.leftRightInput * speed);
@@ -50,6 +76,12 @@ public class PlayerController : MonoBehaviour
         {
             timeSinceShoot = 0;
             Shoot();
+        }
+
+        if (inputs.buildMode)
+        {
+            SpawnButtonController.spawner.OpenBuild();
+            inputs.buildMode = false;
         }
     }
 }
