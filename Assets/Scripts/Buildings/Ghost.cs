@@ -7,12 +7,18 @@ public class Ghost : BaseBuilding
     float timeSinceCheck = 0;
     float checkTime = 0.5f;
 
-    bool canPlace;
+    bool first;
+
+    public bool canPlace;
     GhostRenderer[] ghostRenderers;
+
+    [SerializeField]
+    GameObject nonGhostPrefab;
 
 
     private void Start()
     {
+        first = true;
         ghostRenderers = GetComponentsInChildren<GhostRenderer>();
     }
 
@@ -20,8 +26,8 @@ public class Ghost : BaseBuilding
     // Update is called once per frame
     void Update()
     {
-        input = GameManager.manager.players[0].GetComponent<PlayerController>().inputs;
         SnapToMouse();
+
 
         timeSinceCheck += Time.deltaTime;
 
@@ -29,30 +35,56 @@ public class Ghost : BaseBuilding
         {
             timeSinceCheck = 0;
 
-            bool notinrange = true;
+            canPlace = !CheckIfBlocked();
 
-            foreach(GameObject building in GameManager.manager.buildings)
+
+            first = false;
+
+
+            foreach (GhostRenderer render in ghostRenderers)
             {
-                notinrange = !InRange(building.transform, Mathf.Max(building.GetComponent<BaseBuilding>().blockingRadius, blockingRadius));
-                if (notinrange)
+                render.SetMat(canPlace);
+            }
+            
+
+
+        }
+
+        if (input.primaryAttack && canPlace)
+        {
+            GameObject nonGhost = Instantiate(nonGhostPrefab, transform.position, Quaternion.identity);
+            nonGhost.GetComponent<BaseBuilding>().input = input;
+            nonGhost.GetComponent<BaseBuilding>().team = team;
+            Destroy(gameObject);
+        }
+    }
+
+    private bool CheckIfBlocked()
+    {
+        bool isBlocked = false;
+
+        foreach (GameObject building in GameManager.manager.buildings)
+        {
+            isBlocked = InRange(building.transform, Mathf.Max(building.GetComponent<BaseBuilding>().blockingRadius, blockingRadius));
+            if (isBlocked)
+            {
+                break;
+            }
+
+        }
+
+        if (!isBlocked)
+        {
+            foreach (GameObject player in GameManager.manager.players)
+            {
+                isBlocked = InRange(player.transform, blockingRadius);
+                if (isBlocked)
                 {
                     break;
                 }
-                    
             }
-
-            //check if we need to change textures
-            if(notinrange != canPlace)
-            {
-                canPlace = notinrange;
-
-                foreach(GhostRenderer render in ghostRenderers)
-                {
-                    render.SetMat(canPlace);
-                }
-            }
-
-            
         }
+
+        return isBlocked;
     }
 }

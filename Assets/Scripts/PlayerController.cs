@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
 
     float speed = 5;
 
+    [SerializeField]
+    public Teams.Team team;
+
     Transform thisTransform;
     Rigidbody thisRigid;
 

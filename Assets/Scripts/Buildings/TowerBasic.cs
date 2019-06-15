@@ -21,12 +21,12 @@ public class TowerBasic : BaseBuilding
 
     public void Awake()
     {
-        blockingRadius = 4;
+        blockingRadius = 4.5f;
     }
 
     private void Start()
     {
-        navMesh.StitchNodes(nodes);
+        NavMesh.singleton.StitchNodes(nodes);
         GameManager.manager.buildings.Add(gameObject);
     }
 
@@ -37,9 +37,13 @@ public class TowerBasic : BaseBuilding
     {
         foreach(GameObject player in GameManager.manager.players)
         {
-            if (InRange(player.transform, range)) {
-                GameObject bullet = Instantiate(bulletPrefab, shoot.position, Quaternion.identity);
-                bullet.GetComponent<BulletScript>().target = player.transform;
+            if (player.GetComponent<PlayerController>().team != team)
+            {
+                if (InRange(player.transform, range))
+                {
+                    GameObject bullet = Instantiate(bulletPrefab, shoot.position, Quaternion.identity);
+                    bullet.GetComponent<BulletScript>().target = player.transform;
+                }
             }
         }
 
@@ -48,7 +52,6 @@ public class TowerBasic : BaseBuilding
     // Update is called once per frame
     void Update()
     {
-        input = GameManager.manager.players[0].GetComponent<PlayerController>().inputs;
         mostRecentShoot -= Time.deltaTime;
 
         if(mostRecentShoot < 0)

@@ -34,6 +34,8 @@ public class HumanBrain : BaseBrain
             // TODO check tag for buildable on hit
             inputs.lookPos = hit.point;
         }
+
+        inputs.primaryAttack = Input.GetMouseButton(0);
     }
 
 }

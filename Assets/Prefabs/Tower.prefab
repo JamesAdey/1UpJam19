@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 236305328}
   - component: {fileID: 236305329}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: NavNode (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 477936765}
   - component: {fileID: 477936764}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: NavNode (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 581575402}
   - component: {fileID: 581575401}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: NavNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 671747009}
   - component: {fileID: 671747010}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: NavNode (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 5830228954015435704}
   - component: {fileID: 5830228954015435705}
   - component: {fileID: 5830228954015435706}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: ExtraBit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 5830228954893830571}
   - component: {fileID: 5830228954893830572}
   - component: {fileID: 5830228954893830573}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: MainBit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +376,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5830228955307851745}
   - component: {fileID: 5830228955307851744}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,7 +429,7 @@ MonoBehaviour:
     leftRightInput: 0
     forwardBackwardInput: 0
     lookPos: {x: 0, y: 0, z: 0}
-  navMesh: {fileID: 0}
+    primaryAttack: 0
   bulletPrefab: {fileID: 7563192733671129351, guid: f5198efe543f6b245bd54f911ad3aae7,
     type: 3}
   shoot: {fileID: 5830228955390108202}
@@ -444,7 +444,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5830228955390108202}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -476,7 +476,7 @@ GameObject:
   - component: {fileID: 5830228955780306017}
   - component: {fileID: 5830228955780306030}
   - component: {fileID: 5830228955780306031}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: ShootyBit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
