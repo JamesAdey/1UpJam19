@@ -54,6 +54,7 @@ public class Ghost : BaseBuilding
         {
             GameObject nonGhost = Instantiate(nonGhostPrefab, transform.position, Quaternion.identity);
             nonGhost.GetComponent<BaseBuilding>().input = input;
+            nonGhost.GetComponent<BaseBuilding>().team = team;
             Destroy(gameObject);
         }
     }

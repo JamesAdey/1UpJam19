@@ -11,6 +11,8 @@ public abstract class BaseBuilding : MonoBehaviour
     public List<NavNode> nodes;
     public PlayerInput input;
 
+    public Teams.Team team;
+
 
 
     public void SnapToMouse()

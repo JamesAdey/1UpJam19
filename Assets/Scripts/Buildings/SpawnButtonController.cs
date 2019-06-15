@@ -13,6 +13,7 @@ public class SpawnButtonController : MonoBehaviour
         GameObject ghost = Instantiate(towerPrefab, Vector3.zero, Quaternion.identity);
         PlayerInput input = GameManager.manager.players[0].GetComponent<PlayerController>().inputs;
         ghost.GetComponent<Ghost>().input = input;
+        ghost.GetComponent<BaseBuilding>().team = Teams.Team.PLAYER;
         ghost.GetComponent<BaseBuilding>().SnapToMouse();
 
     }

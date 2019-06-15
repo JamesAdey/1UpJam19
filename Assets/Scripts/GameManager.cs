@@ -24,7 +24,9 @@ public class GameManager : MonoBehaviour
 
         GameObject player = Instantiate(playerPrefab, new Vector3(0, 10, 0), Quaternion.identity);
         HumanBrain brain = player.GetComponent < HumanBrain >();
+        PlayerController playercon = player.GetComponent<PlayerController>();
         brain.cam = Camera.main;
+        playercon.team = Teams.Team.PLAYER;
         Camera.main.GetComponent<TopDownCamera>().target = player.transform;
 
         players.Add(player);
