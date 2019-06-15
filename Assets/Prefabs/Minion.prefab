@@ -278,5 +278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c67831f533e41428ed7c96668b39ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myTeam: 2
+  health: 10
   speed: 3
+  attackRange: 3
   desiredDir: {x: 0, y: 0, z: 0}

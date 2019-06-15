@@ -10,15 +10,25 @@ public class Minion : MonoBehaviour, IDamageable
     Rigidbody thisRigidbody;
     Transform thisTransform;
 
-    public float health = 10;
+    [SerializeField]
+    private Teams.Team myTeam = Teams.Team.NONE;
+    [SerializeField]
+    private float health = 10;
+    [SerializeField]
+    public float speed = 3;
+    [SerializeField]
+    private float attackRange = 3;
+    [SerializeField]
+    private DamageInfo damage;
+
 
     MovementCMap movementMap = new MovementCMap();
     CB_ChaseTower chaseTowerBehaviour = new CB_ChaseTower();
-    public float speed = 3;
-    public float attackRange = 3;
+    
     public Vector3 desiredDir;
     private Barracks myBarracks;
     
+
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +65,7 @@ public class Minion : MonoBehaviour, IDamageable
     internal void SetBarracks(Barracks barracks)
     {
         myBarracks = barracks;
+        myTeam = myBarracks.team;
     }
 
     public Vector3 Position => thisTransform.position;
@@ -65,6 +76,15 @@ public class Minion : MonoBehaviour, IDamageable
         if(Physics.Raycast(thisTransform.position, thisTransform.forward, out hit, attackRange))
         {
             // check team
+            var damageable = hit.transform.GetComponent<IDamageable>();
+            if(damageable == null)
+            {
+                return;
+            }
+            if(damageable.GetTeam() != myTeam)
+            {
+                damageable.TakeDamage(damage);
+            }
         }
     }
 
@@ -76,5 +96,10 @@ public class Minion : MonoBehaviour, IDamageable
     public void TakeDamage(DamageInfo info)
     {
         health -= info.damage;
+    }
+
+    public Teams.Team GetTeam()
+    {
+        return myTeam;
     }
 }
