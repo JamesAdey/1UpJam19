@@ -47,9 +47,6 @@ public class SpawnButtonController : MonoBehaviour
         PlayerData data = GameManager.manager.GetPlayer(team);
         building.GetComponent<BaseBuilding>().input = data.brain.GetInputs();
         building.GetComponent<BaseBuilding>().team = team;
-        data.buildings.Add(building.GetComponent<BaseBuilding>());
-
-        
     }
 
     public void OpenBuild()

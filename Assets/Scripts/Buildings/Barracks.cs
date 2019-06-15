@@ -29,8 +29,9 @@ public class Barracks : BaseBuilding
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
+        base.Update();
         bool spawnReady = Time.time > nextSpawnTime;
         bool hasFreeSlot = units.Count < maxUnits;
         
@@ -38,6 +39,7 @@ public class Barracks : BaseBuilding
         {
             SpawnUnit();
         }
+        
     }
 
     private void SpawnUnit()
@@ -54,6 +56,16 @@ public class Barracks : BaseBuilding
     internal void OnUnitKilled(Minion minion)
     {
         units.Remove(minion);
+    }
+
+    protected override void Die()
+    {
+        foreach(var minion in units)
+        {
+            minion.ClearBarracks();
+        }
+        units.Clear();
+        base.Die();
     }
 
     public override Vector3 GetPosition()

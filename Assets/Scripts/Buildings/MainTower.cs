@@ -35,6 +35,7 @@ public class MainTower : BaseBuilding
    
     protected override void Die()
     {
+        base.Die();
         GameManager.manager.EndGame(GameManager.GetOpposingTeam(team));
     }
 }

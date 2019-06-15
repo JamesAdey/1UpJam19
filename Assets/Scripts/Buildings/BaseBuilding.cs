@@ -76,6 +76,16 @@ public abstract class BaseBuilding : MonoBehaviour , IDamageable
 
         health.inflictDamange(info.damage);
 
+        
+    }
+
+    public virtual void Update()
+    {
+        if(health == null)
+        {
+            return;
+        }
+
         if (health.isDead())
         {
             Die();
@@ -84,13 +94,14 @@ public abstract class BaseBuilding : MonoBehaviour , IDamageable
 
     protected virtual void Die()
     {
+        var player = GameManager.manager.GetPlayer(team);
+        player.buildings.Remove(this);
         NavMesh.singleton.UnstitchNodes(nodes);
-        GameManager.manager.GetPlayer(team).buildings.Remove(this);
         Destroy(gameObject);
     }
 
     public Teams.Team GetTeam()
     {
-        throw new System.NotImplementedException();
+        return team;
     }
 }
