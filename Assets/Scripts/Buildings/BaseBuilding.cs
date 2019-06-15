@@ -82,7 +82,7 @@ public abstract class BaseBuilding : MonoBehaviour , IDamageable
         }
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         NavMesh.singleton.UnstitchNodes(nodes);
         GameManager.manager.GetPlayer(team).buildings.Remove(this);

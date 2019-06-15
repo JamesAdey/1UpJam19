@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BuildingType { BARRACKS, TOWER }
+public enum BuildingType { BARRACKS, TOWER, MAIN }
 
 public class BuildingInfo : MonoBehaviour
 {
@@ -14,8 +14,11 @@ public class BuildingInfo : MonoBehaviour
     [SerializeField]
     GameObject towerPrefab;
 
+    [SerializeField]
+    GameObject mainBuildingPrefab;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         inf = this;
     }
@@ -28,6 +31,8 @@ public class BuildingInfo : MonoBehaviour
                 return barracksPrefab;
             case BuildingType.TOWER:
                 return towerPrefab;
+            case BuildingType.MAIN:
+                return mainBuildingPrefab;
             default:
                 return null;
         }
