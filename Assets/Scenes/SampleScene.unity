@@ -749,23 +749,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5830228955307851744, guid: 4e8d296435697fa479ea797e6e2105ce,
         type: 3}
-      propertyPath: navMesh
-      value: 
-      objectReference: {fileID: 1079370983}
+      propertyPath: blockingRadius
+      value: 4.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e8d296435697fa479ea797e6e2105ce, type: 3}
---- !u!114 &1079370983 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6464901150929972341, guid: 44801e58d80f3254d8a00e274f8d4663,
-    type: 3}
-  m_PrefabInstance: {fileID: 6464901152006998162}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c89742f9019a9334d8b74eae0e48c178, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1254900391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,7 +1185,7 @@ PrefabInstance:
     - target: {fileID: 6193464634616431519, guid: 60478b9dd540c264d85c4d491cc31828,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.21
+      value: 1.02
       objectReference: {fileID: 0}
     - target: {fileID: 6193464634616431519, guid: 60478b9dd540c264d85c4d491cc31828,
         type: 3}
@@ -1207,7 +1195,7 @@ PrefabInstance:
     - target: {fileID: 6193464634616431519, guid: 60478b9dd540c264d85c4d491cc31828,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.04
+      value: 22.56
       objectReference: {fileID: 0}
     - target: {fileID: 6193464634616431519, guid: 60478b9dd540c264d85c4d491cc31828,
         type: 3}

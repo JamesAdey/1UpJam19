@@ -13,10 +13,24 @@ public class Barracks : BaseBuilding
     public List<Minion> units;
 
     private float nextSpawnTime;
+
+    private TeamMatChanger[] matChangers;
     // Start is called before the first frame update
     void Start()
     {
         nextSpawnTime = Time.time + spawnDelay;
+        NavMesh.singleton.StitchNodes(nodes);
+        GameManager.manager.buildings.Add(gameObject);
+        matChangers = GetComponentsInChildren<TeamMatChanger>();
+        UpdateVisuals();
+    }
+
+    private void UpdateVisuals()
+    {
+        foreach(TeamMatChanger script in matChangers)
+        {
+            script.ChangeTeam(team);
+        }
     }
 
     // Update is called once per frame

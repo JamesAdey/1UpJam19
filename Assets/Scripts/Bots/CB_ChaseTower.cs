@@ -22,6 +22,11 @@ public class CB_ChaseTower : ContextBehaviour<float>
         float highest = 1;
         foreach(GameObject go in GameManager.manager.buildings)
         {
+            var building = go.GetComponent<BaseBuilding>();
+            if (building.team == m.GetTeam())
+            {
+                continue;
+            }
             Vector3 dir = (go.transform.position - m.Position);
             float sqrMag = dir.sqrMagnitude;
             if(sqrMag > highest)

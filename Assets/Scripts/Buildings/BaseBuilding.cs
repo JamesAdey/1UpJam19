@@ -13,8 +13,6 @@ public abstract class BaseBuilding : MonoBehaviour
 
     public Teams.Team team;
 
-
-
     public void SnapToMouse()
     {
         Vector3 mousePos = input.lookPos;
@@ -27,6 +25,12 @@ public abstract class BaseBuilding : MonoBehaviour
         Vector3 pos2 = transform.position;
         float sqDist = (pos1 - pos2).sqrMagnitude;
         return sqDist <= (range * range);
+    }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, blockingRadius);
     }
 
 }
