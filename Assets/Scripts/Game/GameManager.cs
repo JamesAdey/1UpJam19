@@ -11,6 +11,15 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject playerPrefab;
 
+    [SerializeField]
+    public GameObject AICanvas;
+
+    [SerializeField]
+    public GameObject playerCanvas;
+
+    [SerializeField]
+    public GameObject healthBarPrefab;
+
     public List<PlayerData> players = new List<PlayerData>();
 
     public PlayerData humanPlayer;
@@ -82,11 +91,17 @@ public class GameManager : MonoBehaviour
         Camera.main.GetComponent<TopDownCamera>().target = playerObj.transform;
         
 
-        // Fill in the fields
+        // Fill in the field
         data.controller = playerObj.GetComponent<PlayerController>();
         data.team = Teams.Team.PLAYER;
         data.controller.team = Teams.Team.PLAYER;
         data.brain = brain;
+
+        GameObject healthBar = Instantiate(healthBarPrefab, playerCanvas.transform);
+
+        data.controller.healthBar = healthBar;
+        
+ 
         
         return data;
     }
@@ -104,6 +119,10 @@ public class GameManager : MonoBehaviour
         data.controller.team = Teams.Team.AI;
         data.team = Teams.Team.AI;
         data.brain = brain;
+
+        GameObject healthBar = Instantiate(healthBarPrefab, AICanvas.transform);
+
+        data.controller.healthBar = healthBar;
 
         return data;
     }

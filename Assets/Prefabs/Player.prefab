@@ -200,6 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89db40a10df5d6447b86350159074a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  health: {fileID: 0}
   myMode: 0
   brain: {fileID: 0}
   inputs:
@@ -210,6 +212,7 @@ MonoBehaviour:
     lookPos: {x: 0, y: 0, z: 0}
     primaryAttack: 0
     buildMode: 0
+    buildingEuler: {x: 0, y: 0, z: 0}
   bulletPrefab: {fileID: 7563192733671129351, guid: f5198efe543f6b245bd54f911ad3aae7,
     type: 3}
   timeSinceShoot: 0

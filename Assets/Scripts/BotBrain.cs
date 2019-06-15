@@ -20,8 +20,6 @@ public class BotBrain : BaseBrain
     {
         thisTransform = GetComponent<Transform>();
         movementMap.Init(8);
-        var prefab = BuildingInfo.inf.GetPrefab(BuildingType.BARRACKS);
-        SpawnButtonController.spawner.SpawnBuilding(prefab, Teams.Team.AI, new Vector3(-20,4,-20) , Vector3.zero);
     }
 
     // Update is called once per frame

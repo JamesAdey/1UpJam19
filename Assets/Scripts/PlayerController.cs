@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour , IDamageable
 {
     public enum Mode
     {
@@ -10,6 +10,11 @@ public class PlayerController : MonoBehaviour
         BUILD,
         END
     }
+
+    [SerializeField]
+    public GameObject healthBar;
+
+    public HealthBar health;
 
     public Mode myMode = Mode.GAME;
 
@@ -36,6 +41,9 @@ public class PlayerController : MonoBehaviour
         thisTransform = GetComponent<Transform>();
         brain = GetComponent<BaseBrain>();
         thisRigid = GetComponent<Rigidbody>();
+        health = healthBar.GetComponent<HealthBar>();
+        health.parentTransform = thisTransform;
+        health.maxHealth = 1000;
         UpdateVisuals();
     }
 
@@ -102,5 +110,20 @@ public class PlayerController : MonoBehaviour
             SpawnButtonController.spawner.OpenBuild();
             inputs.buildMode = false;
         }
+    }
+
+    public void TakeDamage(DamageInfo info)
+    {
+        health.inflictDamange(info.damage);
+
+        if (health.isDead())
+        {
+            GameManager.manager.EndGame(GameManager.GetOpposingTeam(team));
+        }
+    }
+
+    public Teams.Team GetTeam()
+    {
+        return team;
     }
 }

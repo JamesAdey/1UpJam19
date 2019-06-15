@@ -12,13 +12,13 @@ public class HealthBar : MonoBehaviour
     RectTransform thisRectTrans;
 
     [SerializeField]
-    float maxHealth = 100f;
+    public float maxHealth = 100f;
 
     [SerializeField]
     float myHealth = 100f;
 
     [SerializeField]
-    Transform parentTransform;
+    public Transform parentTransform;
 
     private void Start()
     {
