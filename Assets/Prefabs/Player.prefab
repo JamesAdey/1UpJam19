@@ -186,6 +186,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brain: {fileID: 0}
+  inputs:
+    walkDir: {x: 0, y: 0, z: 0}
+    strafeDir: {x: 0, y: 0, z: 0}
+    leftRightInput: 0
+    forwardBackwardInput: 0
+    lookPos: {x: 0, y: 0, z: 0}
+    primaryAttack: 0
+  bulletPrefab: {fileID: 7563192733671129351, guid: f5198efe543f6b245bd54f911ad3aae7,
+    type: 3}
+  team: 0
 --- !u!114 &9135605042560061651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +214,7 @@ MonoBehaviour:
     leftRightInput: 0
     forwardBackwardInput: 0
     lookPos: {x: 0, y: 0, z: 0}
+    primaryAttack: 0
   cam: {fileID: 0}
 --- !u!54 &3175619406681076480
 Rigidbody:

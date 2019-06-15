@@ -37,7 +37,8 @@ public class TowerBasic : BaseBuilding
     {
         foreach(GameObject player in GameManager.manager.players)
         {
-            if (player.GetComponent<PlayerController>().team != team)
+            Teams.Team enemyTeam = Teams.GetEnemyTeam(team);
+            if (enemyTeam == Teams.Team.NONE || player.GetComponent<PlayerController>().team == enemyTeam)
             {
                 if (InRange(player.transform, range))
                 {
