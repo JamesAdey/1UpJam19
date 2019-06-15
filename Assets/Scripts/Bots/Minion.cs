@@ -17,7 +17,7 @@ public class Minion : MonoBehaviour, IDamageable
     [SerializeField]
     private float speed = 3;
     [SerializeField]
-    private float attackDelay = 1;
+    private float attackDelay = 0.5f;
     [SerializeField]
     private float attackRange = 3;
     public float AttackRange => attackRange;
@@ -36,7 +36,8 @@ public class Minion : MonoBehaviour, IDamageable
 
     private Barracks myBarracks;
     private PlayerData myPlayer;
-    
+
+    private TeamMatChanger[] matChangers;
 
     public void SetOwningPlayer(PlayerData player)
     {
@@ -52,7 +53,25 @@ public class Minion : MonoBehaviour, IDamageable
         movementMap.Init(8);
         attackMap.Init(1);
         myPlayer.minions.Add(this);
+        UpdateVisuals();
+        
     }
+
+    protected void UpdateVisuals()
+    {
+        if (matChangers == null)
+        {
+
+            matChangers = GetComponentsInChildren<TeamMatChanger>();
+        }
+
+        foreach (TeamMatChanger script in matChangers)
+        {
+            script.ChangeTeam(myTeam);
+        }
+    }
+
+    
 
     // Update is called once per frame
     void FixedUpdate()
@@ -66,14 +85,19 @@ public class Minion : MonoBehaviour, IDamageable
         Vector3 vel = desiredDir * speed;
         vel.y = thisRigidbody.velocity.y;
         thisRigidbody.velocity = vel;
+        thisRigidbody.angularVelocity = Vector3.zero;
 
-        bool doAttack = attackMap.Evaluate();
+        desiredDir.y = 0;
+        Quaternion desiredRot = Quaternion.LookRotation(desiredDir);
+        thisRigidbody.rotation = Quaternion.RotateTowards(thisRigidbody.rotation, desiredRot,90*Time.deltaTime);
+
+        doAttack = attackMap.Evaluate();
         if (doAttack)
         {
             Attack();
         }
 
-        if (health < 0)
+        if (health <= 0)
         {
             OnDeath();
         }
@@ -98,6 +122,11 @@ public class Minion : MonoBehaviour, IDamageable
         myTeam = myBarracks.team;
     }
 
+    internal void ClearBarracks()
+    {
+        myBarracks = null;
+    }
+
     public Vector3 Position => thisTransform.position;
 
     private void Attack()
@@ -108,16 +137,16 @@ public class Minion : MonoBehaviour, IDamageable
         }
         nextAttackTime = Time.time + attackDelay;
 
-        RaycastHit hit;
-        if(Physics.Raycast(thisTransform.position, thisTransform.forward, out hit, attackRange))
+        Collider[] hits = Physics.OverlapSphere(thisTransform.position + (thisTransform.forward*1.1f), 0.5f);
+        foreach(var hit in hits)
         {
             // check team
-            var damageable = hit.transform.GetComponent<IDamageable>();
-            if(damageable == null)
+            var damageable = hit.transform.GetComponentInParent<IDamageable>();
+            if (damageable == null)
             {
-                return;
+                continue;
             }
-            if(damageable.GetTeam() != myTeam)
+            if (damageable.GetTeam() != myTeam)
             {
                 damageable.TakeDamage(damage);
             }

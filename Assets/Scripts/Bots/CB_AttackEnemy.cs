@@ -29,8 +29,9 @@ public class CB_AttackEnemy : ContextBehaviour<bool>
         foreach (BaseBuilding building in enemy.buildings)
         {
             diff = building.GetPosition() - m.Position;
+            float buildingSqrRange = building.blockingRadius * building.blockingRadius;
             sqrMag = diff.sqrMagnitude;
-            if (sqrMag < sqrRange)
+            if (sqrMag < buildingSqrRange)
             {
                 contextMap.Write(true, 1);
                 return;

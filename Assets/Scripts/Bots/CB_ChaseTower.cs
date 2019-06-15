@@ -21,6 +21,7 @@ public class CB_ChaseTower : ContextBehaviour<float>
         weights.Clear();
         float highest = 1;
         PlayerData enemy = GameManager.manager.GetOpposingPlayer(m.GetTeam());
+        
         foreach (BaseBuilding building in enemy.buildings)
         {
             highest = MarkMap(m.Position, building.GetPosition(), highest);
