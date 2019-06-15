@@ -50,6 +50,7 @@ public class Minion : MonoBehaviour, IDamageable
         thisRigidbody = GetComponent<Rigidbody>();
         thisTransform = GetComponent<Transform>();
         movementMap.Init(8);
+        attackMap.Init(1);
         myPlayer.minions.Add(this);
     }
 

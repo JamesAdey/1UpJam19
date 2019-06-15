@@ -33,7 +33,7 @@ public class AttackCMap : ContextMap<float>
     {
         int index = 0;
         float highest = slots[0];
-        for (int i = 1; i < 8; i++)
+        for (int i = 1; i < slots.Length; i++)
         {
             if (slots[i] > highest)
             {
