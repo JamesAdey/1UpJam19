@@ -34,10 +34,12 @@ public class NavNode : MonoBehaviour
 
     public void DisconnectAll()
     {
-        foreach (NavNode neighbour in neighbours)
+        for(int i = neighbours.Count-1; i >= 0; i--)
         {
-            Disconnect(neighbour);
+            NavNode neighbour = neighbours[i];
+            neighbour.neighbours.Remove(this);
         }
+        neighbours.Clear();
     }
 
     public void OnDrawGizmos()
