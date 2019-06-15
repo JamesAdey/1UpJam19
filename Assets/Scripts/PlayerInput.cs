@@ -10,5 +10,6 @@ public class PlayerInput
     public float leftRightInput;
     public float forwardBackwardInput;
     public Vector3 lookPos;
+    public bool primaryAttack;
     
 }

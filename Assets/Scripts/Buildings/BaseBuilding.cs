@@ -11,8 +11,7 @@ public abstract class BaseBuilding : MonoBehaviour
     public List<NavNode> nodes;
     public PlayerInput input;
 
-    [SerializeField]
-    protected NavMesh navMesh; 
+
 
     public void SnapToMouse()
     {

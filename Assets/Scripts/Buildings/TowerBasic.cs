@@ -21,12 +21,12 @@ public class TowerBasic : BaseBuilding
 
     public void Awake()
     {
-        blockingRadius = 4;
+        blockingRadius = 4.5f;
     }
 
     private void Start()
     {
-        navMesh.StitchNodes(nodes);
+        NavMesh.singleton.StitchNodes(nodes);
         GameManager.manager.buildings.Add(gameObject);
     }
 
