@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b516f1fccdc41443927bd434821ca8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockingRadius: 0
+  blockingRadius: 7
   nodes:
   - {fileID: 329283282}
   - {fileID: 2138977626}
@@ -435,6 +435,7 @@ GameObject:
   - component: {fileID: 2249725283029450199}
   - component: {fileID: 2249725283028123125}
   - component: {fileID: 2249725283027025717}
+  - component: {fileID: 2249725283029017080}
   m_Layer: 0
   m_Name: barracks_roof
   m_TagString: Untagged
@@ -501,6 +502,21 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &2249725283029017080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2249725283029017079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5aa01f266c496844bfcb563e3092c4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultMat: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  playerMat: {fileID: 2100000, guid: 0e4344d6c9b9db34195c10c990414089, type: 2}
+  aiMat: {fileID: 2100000, guid: a2f25a94403ad3b4da17cafe930b3ead, type: 2}
 --- !u!1 &3491624129178940849
 GameObject:
   m_ObjectHideFlags: 0
