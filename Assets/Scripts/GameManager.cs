@@ -9,27 +9,92 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject playerPrefab;
 
-    public List<GameObject> players = new List<GameObject>();
+    public List<PlayerData> players = new List<PlayerData>();
 
-    public List<GameObject> buildings = new List<GameObject>();
+    public PlayerData humanPlayer;
 
     private void Awake()
     {
         manager = this;
     }
 
+    public PlayerData GetPlayer(Teams.Team t)
+    {
+        foreach(var player in players)
+        {
+            if(player.team == t)
+            {
+                return player;
+            }
+        }
+        return null;
+    }
+
+    public static Teams.Team GetOpposingTeam(Teams.Team t)
+    {
+        if(t == Teams.Team.PLAYER)
+        {
+            return Teams.Team.AI;
+        }
+        if(t == Teams.Team.AI)
+        {
+            return Teams.Team.PLAYER;
+        }
+        return Teams.Team.NONE;
+    }
+
+    public PlayerData GetOpposingPlayer(Teams.Team t)
+    {
+        Teams.Team enemyTeam = GetOpposingTeam(t);
+        return GetPlayer(enemyTeam);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
 
-        GameObject player = Instantiate(playerPrefab, new Vector3(0, 10, 0), Quaternion.identity);
-        HumanBrain brain = player.GetComponent < HumanBrain >();
-        PlayerController playercon = player.GetComponent<PlayerController>();
-        brain.cam = Camera.main;
-        playercon.team = Teams.Team.PLAYER;
-        Camera.main.GetComponent<TopDownCamera>().target = player.transform;
+        humanPlayer = CreateHumanPlayer();
+        players.Add(humanPlayer);
 
-        players.Add(player);
+        PlayerData botPlayer = CreateBotPlayer();
+        players.Add(botPlayer);
+    }
+
+    PlayerData CreateHumanPlayer()
+    {
+        PlayerData data = new PlayerData();
+        GameObject playerObj = Instantiate(playerPrefab, new Vector3(0, 10, 10), Quaternion.identity);
+
+        // Camera stuff
+        HumanBrain brain = playerObj.AddComponent<HumanBrain>();
+        brain.cam = Camera.main;
+        Camera.main.GetComponent<TopDownCamera>().target = playerObj.transform;
+        
+
+        // Fill in the fields
+        data.controller = playerObj.GetComponent<PlayerController>();
+        data.team = Teams.Team.PLAYER;
+        data.controller.team = Teams.Team.PLAYER;
+        data.brain = brain;
+        
+        return data;
+    }
+
+    PlayerData CreateBotPlayer()
+    {
+        PlayerData data = new PlayerData();
+        GameObject playerObj = Instantiate(playerPrefab, new Vector3(0, 10, -10), Quaternion.identity);
+        
+        // BRAAAAINS!
+        BotBrain brain = playerObj.AddComponent<BotBrain>();
+
+        // Fill in the fields
+        data.controller = playerObj.GetComponent<PlayerController>();
+        data.controller.team = Teams.Team.AI;
+        data.team = Teams.Team.AI;
+        data.brain = brain;
+
+        return data;
     }
 
     // Update is called once per frame

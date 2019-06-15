@@ -15,12 +15,16 @@ public class Barracks : BaseBuilding
     private float nextSpawnTime;
 
     private TeamMatChanger[] matChangers;
+
+    Transform thisTransform;
     // Start is called before the first frame update
     void Start()
     {
+        thisTransform = GetComponent<Transform>();
         nextSpawnTime = Time.time + spawnDelay;
         NavMesh.singleton.StitchNodes(nodes);
-        GameManager.manager.buildings.Add(gameObject);
+        PlayerData player = GameManager.manager.GetPlayer(team);
+        player.buildings.Add(this);
         matChangers = GetComponentsInChildren<TeamMatChanger>();
         UpdateVisuals();
     }
@@ -57,5 +61,10 @@ public class Barracks : BaseBuilding
     internal void OnUnitKilled(Minion minion)
     {
         units.Remove(minion);
+    }
+
+    public override Vector3 GetPosition()
+    {
+        return thisTransform.position;
     }
 }

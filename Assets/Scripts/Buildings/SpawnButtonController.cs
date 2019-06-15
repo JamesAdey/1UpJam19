@@ -22,7 +22,7 @@ public class SpawnButtonController : MonoBehaviour
     public void SpawnGhost()
     {
         GameObject ghost = Instantiate(towerPrefab, Vector3.zero, Quaternion.identity);
-        PlayerInput input = GameManager.manager.players[0].GetComponent<PlayerController>().inputs;
+        PlayerInput input = GameManager.manager.humanPlayer.brain.GetInputs();
         ghost.GetComponent<Ghost>().input = input;
         ghost.GetComponent<BaseBuilding>().team = Teams.Team.PLAYER;
         ghost.GetComponent<BaseBuilding>().SnapToMouse();
@@ -42,11 +42,13 @@ public class SpawnButtonController : MonoBehaviour
 
     public void PlayerEnterMode(PlayerController.Mode newMode, Teams.Team tagToChage)
     {
-        List<GameObject> players = GameManager.manager.players;
 
-        foreach(GameObject player in players)
+        Debug.Log("here");
+        List<PlayerData> players = GameManager.manager.players;
+
+        foreach(PlayerData player in players)
         {
-            PlayerController con = player.GetComponent<PlayerController>();
+            PlayerController con = player.controller;
             if(con.team == tagToChage)
             {
                 con.myMode = newMode;

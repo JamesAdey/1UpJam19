@@ -15,11 +15,13 @@ public class Ghost : BaseBuilding
     [SerializeField]
     GameObject nonGhostPrefab;
 
-
+    Transform thisTransform;
     private void Start()
     {
+        thisTransform = GetComponent<Transform>();
         first = true;
         ghostRenderers = GetComponentsInChildren<GhostRenderer>();
+        
     }
 
 
@@ -61,30 +63,38 @@ public class Ghost : BaseBuilding
 
     private bool CheckIfBlocked()
     {
-        bool isBlocked = false;
-
-        foreach (GameObject building in GameManager.manager.buildings)
+        foreach(PlayerData player in GameManager.manager.players)
         {
-            isBlocked = InRange(building.transform, Mathf.Max(building.GetComponent<BaseBuilding>().blockingRadius, blockingRadius));
-            if (isBlocked)
+            // CHECK BUILDINGS
+            foreach (BaseBuilding building in player.buildings)
             {
-                break;
+                if(InRange(building.transform, Mathf.Max(building.blockingRadius, blockingRadius)))
+                {
+                    return true;
+                }
+
             }
 
-        }
-
-        if (!isBlocked)
-        {
-            foreach (GameObject player in GameManager.manager.players)
+            // CHECK MINIONS
+            foreach (Minion minion in player.minions)
             {
-                isBlocked = InRange(player.transform, blockingRadius);
-                if (isBlocked)
+                if(InRange(minion.Position, blockingRadius))
                 {
-                    break;
+                    return true;
                 }
             }
-        }
 
-        return isBlocked;
+            // CHECK PLAYER OBJECTS
+            if (InRange(player.controller.transform.position, blockingRadius))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public override Vector3 GetPosition()
+    {
+        return thisTransform.position;
     }
 }

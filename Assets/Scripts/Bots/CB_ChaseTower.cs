@@ -20,14 +20,10 @@ public class CB_ChaseTower : ContextBehaviour<float>
         directions.Clear();
         weights.Clear();
         float highest = 1;
-        foreach(GameObject go in GameManager.manager.buildings)
+        PlayerData enemy = GameManager.manager.GetOpposingPlayer(m.GetTeam());
+        foreach (BaseBuilding building in enemy.buildings)
         {
-            var building = go.GetComponent<BaseBuilding>();
-            if (building.team == m.GetTeam())
-            {
-                continue;
-            }
-            Vector3 dir = (go.transform.position - m.Position);
+            Vector3 dir = (building.GetPosition() - m.Position);
             float sqrMag = dir.sqrMagnitude;
             if(sqrMag > highest)
             {

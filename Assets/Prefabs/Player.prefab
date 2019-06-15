@@ -90,7 +90,6 @@ GameObject:
   - component: {fileID: 9135605042560061648}
   - component: {fileID: 9135605042560061663}
   - component: {fileID: 9135605042560061652}
-  - component: {fileID: 9135605042560061651}
   - component: {fileID: 3175619406681076480}
   m_Layer: 0
   m_Name: Player
@@ -185,6 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89db40a10df5d6447b86350159074a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myMode: 0
   brain: {fileID: 0}
   inputs:
     walkDir: {x: 0, y: 0, z: 0}
@@ -193,29 +193,12 @@ MonoBehaviour:
     forwardBackwardInput: 0
     lookPos: {x: 0, y: 0, z: 0}
     primaryAttack: 0
+    buildMode: 0
   bulletPrefab: {fileID: 7563192733671129351, guid: f5198efe543f6b245bd54f911ad3aae7,
     type: 3}
-  team: 0
---- !u!114 &9135605042560061651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9135605042560061662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2002740c3bd0f124e849229b51596e65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputs:
-    walkDir: {x: 0, y: 0, z: 0}
-    strafeDir: {x: 0, y: 0, z: 0}
-    leftRightInput: 0
-    forwardBackwardInput: 0
-    lookPos: {x: 0, y: 0, z: 0}
-    primaryAttack: 0
-  cam: {fileID: 0}
+  timeSinceShoot: 0
+  timeForShoot: 0.5
+  team: 1
 --- !u!54 &3175619406681076480
 Rigidbody:
   m_ObjectHideFlags: 0

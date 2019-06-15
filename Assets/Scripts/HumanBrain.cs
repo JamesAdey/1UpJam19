@@ -5,7 +5,7 @@ using UnityEngine;
 public class HumanBrain : BaseBrain
 {
     [SerializeField]
-    private PlayerInput inputs;
+    private PlayerInput inputs = new PlayerInput();
 
     [SerializeField]
     public Camera cam;
@@ -13,11 +13,6 @@ public class HumanBrain : BaseBrain
     public override PlayerInput GetInputs()
     {
         return inputs;
-    }
-
-    private void Start()
-    {
-        inputs = new PlayerInput();
     }
 
     // Update is called once per frame

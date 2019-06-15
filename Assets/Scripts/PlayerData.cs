@@ -10,4 +10,5 @@ public class PlayerData
     public PlayerController controller;
     public BaseBrain brain;
     public Teams.Team team;
+    public Material material;
 }

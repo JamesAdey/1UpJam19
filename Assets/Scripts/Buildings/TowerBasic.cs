@@ -19,6 +19,8 @@ public class TowerBasic : BaseBuilding
     [SerializeField]
     float shootTime = 1;
 
+    Transform thisTransform;
+
     public void Awake()
     {
         blockingRadius = 4.5f;
@@ -26,8 +28,10 @@ public class TowerBasic : BaseBuilding
 
     private void Start()
     {
+        thisTransform = GetComponent<Transform>();
         NavMesh.singleton.StitchNodes(nodes);
-        GameManager.manager.buildings.Add(gameObject);
+        PlayerData player = GameManager.manager.GetPlayer(team);
+        player.buildings.Add(this);
     }
 
 
@@ -35,15 +39,15 @@ public class TowerBasic : BaseBuilding
 
     void ShootAtTarget()
     {
-        foreach(GameObject player in GameManager.manager.players)
+        foreach(PlayerData player in GameManager.manager.players)
         {
             Teams.Team enemyTeam = Teams.GetEnemyTeam(team);
-            if (enemyTeam == Teams.Team.NONE || player.GetComponent<PlayerController>().team == enemyTeam)
+            if (enemyTeam == Teams.Team.NONE || player.team == enemyTeam)
             {
-                if (InRange(player.transform, range))
+                if (InRange(player.controller.transform, range))
                 {
                     GameObject bullet = Instantiate(bulletPrefab, shoot.position, Quaternion.identity);
-                    bullet.GetComponent<BulletScript>().target = player.transform;
+                    bullet.GetComponent<BulletScript>().target = player.controller.transform;
                 }
             }
         }
@@ -60,5 +64,10 @@ public class TowerBasic : BaseBuilding
             mostRecentShoot = shootTime;
             ShootAtTarget();
         }
+    }
+
+    public override Vector3 GetPosition()
+    {
+        return thisTransform.position;
     }
 }
