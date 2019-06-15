@@ -35,6 +35,18 @@ public class HumanBrain : BaseBrain
             inputs.buildMode = true;
         }
 
+        float delta = Input.mouseScrollDelta.y;
+        inputs.buildingEuler.y += delta * 10;
+        if (inputs.buildingEuler.y < 0)
+        {
+            inputs.buildingEuler.y += 360;
+        }
+        else if(inputs.buildingEuler.y > 360)
+        {
+            inputs.buildingEuler.y -= 360;
+        }
+
+
         inputs.primaryAttack = Input.GetMouseButton(0);
     }
 

@@ -15,10 +15,27 @@ public abstract class BaseBuilding : MonoBehaviour
 
     public abstract Vector3 GetPosition();
 
+    private TeamMatChanger[] matChangers;
+
+    protected void UpdateVisuals()
+    {
+        if(matChangers == null)
+        {
+
+            matChangers = GetComponentsInChildren<TeamMatChanger>();
+        }
+
+        foreach (TeamMatChanger script in matChangers)
+        {
+            script.ChangeTeam(team);
+        }
+    }
+
     public void SnapToMouse()
     {
         Vector3 mousePos = input.lookPos;
         transform.position = mousePos;
+        transform.eulerAngles = input.buildingEuler;
     }
 
     protected bool InRange(Transform target, float range)

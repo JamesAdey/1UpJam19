@@ -12,5 +12,6 @@ public class PlayerInput
     public Vector3 lookPos;
     public bool primaryAttack;
     public bool buildMode;
+    public Vector3 buildingEuler;
     
 }

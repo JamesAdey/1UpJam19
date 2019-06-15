@@ -361,7 +361,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1425663680
 GameObject:
@@ -396,7 +396,13 @@ MonoBehaviour:
   playerPrefab: {fileID: 9135605042560061662, guid: 3a247c0ab650ac245970494ed81f68a3,
     type: 3}
   players: []
-  buildings: []
+  humanPlayer:
+    minions: []
+    buildings: []
+    controller: {fileID: 0}
+    brain: {fileID: 0}
+    team: 0
+    material: {fileID: 0}
 --- !u!4 &1425663682
 Transform:
   m_ObjectHideFlags: 0
@@ -409,7 +415,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1425663683
 MonoBehaviour:
@@ -784,7 +790,7 @@ PrefabInstance:
     - target: {fileID: 6441364114528586298, guid: ae2c6bf96cf14ca4793cbf981bf09473,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6441364114528586298, guid: ae2c6bf96cf14ca4793cbf981bf09473,
         type: 3}

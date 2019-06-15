@@ -14,7 +14,7 @@ public class Barracks : BaseBuilding
 
     private float nextSpawnTime;
 
-    private TeamMatChanger[] matChangers;
+
 
     Transform thisTransform;
     // Start is called before the first frame update
@@ -25,16 +25,7 @@ public class Barracks : BaseBuilding
         NavMesh.singleton.StitchNodes(nodes);
         PlayerData player = GameManager.manager.GetPlayer(team);
         player.buildings.Add(this);
-        matChangers = GetComponentsInChildren<TeamMatChanger>();
         UpdateVisuals();
-    }
-
-    private void UpdateVisuals()
-    {
-        foreach(TeamMatChanger script in matChangers)
-        {
-            script.ChangeTeam(team);
-        }
     }
 
     // Update is called once per frame
