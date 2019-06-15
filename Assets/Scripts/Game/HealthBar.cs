@@ -12,13 +12,17 @@ public class HealthBar : MonoBehaviour
     RectTransform thisRectTrans;
 
     [SerializeField]
-    float percentHealth = 100f;
+    float maxHealth = 100f;
+
+    [SerializeField]
+    float myHealth = 100f;
 
     [SerializeField]
     Transform parentTransform;
 
     private void Start()
     {
+        myHealth = maxHealth;
         thisRectTrans = GetComponent<RectTransform>();
         thisRectTrans.position = new Vector3(700, 700, 700);
     }
@@ -27,7 +31,7 @@ public class HealthBar : MonoBehaviour
     {
 
         Vector3 scale = healthRectTrans.localScale;
-        scale.x = percentHealth / 100;
+        scale.x = myHealth / maxHealth;
         healthRectTrans.localScale = scale;
 
         Vector3 screenPoint = Camera.main.WorldToScreenPoint(parentTransform.position);
@@ -37,12 +41,12 @@ public class HealthBar : MonoBehaviour
 
     public void inflictDamange(float damage)
     {
-        percentHealth -= damage;
+        myHealth -= damage;
     }
 
     public bool isDead()
     {
-        return percentHealth <= 0;
+        return myHealth <= 0;
     }
 
 

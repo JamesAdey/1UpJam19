@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +14,10 @@ public class GameManager : MonoBehaviour
     public List<PlayerData> players = new List<PlayerData>();
 
     public PlayerData humanPlayer;
+
+    public Text endText;
+
+    public GameObject endPanel;
 
     private void Awake()
     {
@@ -52,12 +58,17 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject towerPrefab = BuildingInfo.inf.GetPrefab(BuildingType.MAIN);
 
         humanPlayer = CreateHumanPlayer();
         players.Add(humanPlayer);
+        SpawnButtonController.spawner.SpawnBuilding(towerPrefab, Teams.Team.PLAYER, new Vector3(0, 4, 35), Vector3.zero);
 
         PlayerData botPlayer = CreateBotPlayer();
         players.Add(botPlayer);
+        SpawnButtonController.spawner.SpawnBuilding(towerPrefab, Teams.Team.AI, new Vector3(0, 4, -35), Vector3.zero);
+
+
     }
 
     PlayerData CreateHumanPlayer()
@@ -95,6 +106,35 @@ public class GameManager : MonoBehaviour
         data.brain = brain;
 
         return data;
+    }
+
+    public void EndGame(Teams.Team winningTeam)
+    {
+        foreach(PlayerData player in players)
+        {
+            player.controller.myMode = PlayerController.Mode.END;
+        }
+
+        string winner = "NONE";
+
+        switch (winningTeam)
+        {
+            case Teams.Team.AI:
+                winner = "AI Wins!";
+                break;
+            case Teams.Team.PLAYER:
+                winner = "You win!";
+                break;
+        }
+
+        endPanel.SetActive(true);
+        endText.text = winner;
+
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("SampleScene");
     }
 
     // Update is called once per frame

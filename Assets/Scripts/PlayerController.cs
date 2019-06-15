@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour
     public enum Mode
     {
         GAME,
-        BUILD
+        BUILD,
+        END
     }
 
     public Mode myMode = Mode.GAME;

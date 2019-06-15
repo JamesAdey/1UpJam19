@@ -17,7 +17,7 @@ public class SpawnButtonController : MonoBehaviour
     [SerializeField]
     GameObject barracksPrefab;
 
-    public void Start()
+    public void Awake()
     {
         spawner = this;
     }
