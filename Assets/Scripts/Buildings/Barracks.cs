@@ -21,7 +21,7 @@ public class Barracks : BaseBuilding
     void Start()
     {
         thisTransform = GetComponent<Transform>();
-        nextSpawnTime = Time.time + spawnDelay;
+        nextSpawnTime = Time.time+1;
         NavMesh.singleton.StitchNodes(nodes);
         PlayerData player = GameManager.manager.GetPlayer(team);
         player.buildings.Add(this);

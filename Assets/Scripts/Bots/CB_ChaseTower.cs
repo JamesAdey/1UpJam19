@@ -23,27 +23,15 @@ public class CB_ChaseTower : ContextBehaviour<float>
         PlayerData enemy = GameManager.manager.GetOpposingPlayer(m.GetTeam());
         foreach (BaseBuilding building in enemy.buildings)
         {
-            Vector3 dir = (building.GetPosition() - m.Position);
-            float sqrMag = dir.sqrMagnitude;
-            if(sqrMag > highest)
-            {
-                highest = sqrMag;
-            }
-            directions.Add(dir);
-            weights.Add(sqrMag);
+            highest = MarkMap(m.Position, building.GetPosition(), highest);
         }
 
         foreach (Minion enemyMinion in enemy.minions)
         {
-            Vector3 dir = (enemyMinion.Position - m.Position);
-            float sqrMag = dir.sqrMagnitude;
-            if (sqrMag > highest)
-            {
-                highest = sqrMag;
-            }
-            directions.Add(dir);
-            weights.Add(sqrMag);
+            highest = MarkMap(m.Position, enemyMinion.Position,highest);
         }
+
+        highest = MarkMap(m.Position, enemy.controller.transform.position, highest);
 
         for (int i = 0; i < weights.Count; i++)
         {
@@ -51,5 +39,18 @@ public class CB_ChaseTower : ContextBehaviour<float>
             contextMap.WriteDirection(directions[i], strength);
         }
 
+    }
+
+    private float MarkMap(Vector3 currentPos, Vector3 targetPos, float highest)
+    {
+        Vector3 dir = (targetPos - currentPos);
+        float sqrMag = dir.sqrMagnitude;
+        if (sqrMag > highest)
+        {
+            highest = sqrMag;
+        }
+        directions.Add(dir);
+        weights.Add(sqrMag);
+        return highest;
     }
 }
