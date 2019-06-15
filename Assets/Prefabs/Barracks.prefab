@@ -248,6 +248,8 @@ MonoBehaviour:
     forwardBackwardInput: 0
     lookPos: {x: 0, y: 0, z: 0}
     primaryAttack: 0
+    buildMode: 0
+    buildingEuler: {x: 0, y: 0, z: 0}
   team: 2
   unitPrefab: {fileID: 6193464634616431509, guid: 60478b9dd540c264d85c4d491cc31828,
     type: 3}

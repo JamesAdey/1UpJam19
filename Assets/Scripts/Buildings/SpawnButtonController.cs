@@ -24,20 +24,20 @@ public class SpawnButtonController : MonoBehaviour
 
     public void SpawnTowerBasic()
     {
-        SpawnGhost(towerPrefab);
+        SpawnGhost(towerPrefab, Teams.Team.PLAYER);
     }
 
     public void SpawnBarracks()
     {
-        SpawnGhost(barracksPrefab);
+        SpawnGhost(barracksPrefab, Teams.Team.PLAYER);
     }
 
-    public void SpawnGhost(GameObject prefab)
+    public void SpawnGhost(GameObject prefab, Teams.Team team)
     {
         GameObject ghost = Instantiate(prefab, Vector3.zero, Quaternion.identity);
         PlayerInput input = GameManager.manager.humanPlayer.brain.GetInputs();
         ghost.GetComponent<Ghost>().input = input;
-        ghost.GetComponent<BaseBuilding>().team = Teams.Team.PLAYER;
+        ghost.GetComponent<BaseBuilding>().team = team;
         ghost.GetComponent<BaseBuilding>().SnapToMouse();
     }
 
@@ -55,8 +55,6 @@ public class SpawnButtonController : MonoBehaviour
 
     public void PlayerEnterMode(PlayerController.Mode newMode, Teams.Team tagToChage)
     {
-
-        Debug.Log("here");
         List<PlayerData> players = GameManager.manager.players;
 
         foreach(PlayerData player in players)

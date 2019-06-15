@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
 
     void Shoot()
     {
-        Debug.Log("banana");
         Vector3 directionOfShoot = thisTransform.forward;
         GameObject bullet = Instantiate(bulletPrefab, transform.position + (directionOfShoot), Quaternion.identity);
         Vector3 targetPoint = new Vector3(inputs.lookPos.x, thisTransform.position.y , inputs.lookPos.z);

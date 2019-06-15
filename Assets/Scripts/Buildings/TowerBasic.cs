@@ -32,6 +32,7 @@ public class TowerBasic : BaseBuilding
         NavMesh.singleton.StitchNodes(nodes);
         PlayerData player = GameManager.manager.GetPlayer(team);
         player.buildings.Add(this);
+        UpdateVisuals();
     }
 
 
