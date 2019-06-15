@@ -7,11 +7,18 @@ public class BulletScript : MonoBehaviour
     [SerializeField]
     public Transform target;
 
+    [SerializeField]
+    public Vector3 targetPoint;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        transform.LookAt(target.position);
+        if(target != null)
+        {
+            targetPoint = target.position;
+        }
+        transform.LookAt(targetPoint);
         GetComponent<Rigidbody>().velocity = transform.forward * 50;
     }
 
