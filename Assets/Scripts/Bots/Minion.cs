@@ -18,17 +18,27 @@ public class Minion : MonoBehaviour, IDamageable
     public float speed = 3;
     [SerializeField]
     private float attackRange = 3;
+    public float AttackRange => attackRange;
     [SerializeField]
     private DamageInfo damage;
 
 
     MovementCMap movementMap = new MovementCMap();
+    AttackCMap attackMap = new AttackCMap();
     CB_ChaseTower chaseTowerBehaviour = new CB_ChaseTower();
+    CB_AttackEnemy attackEnemyBehavious = new CB_AttackEnemy();
     
     public Vector3 desiredDir;
     private Barracks myBarracks;
-    
 
+    private PlayerData myPlayer;
+
+    void SetOwningPlayer(PlayerData player)
+    {
+        myPlayer = player;
+        myTeam = player.team;
+
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +46,7 @@ public class Minion : MonoBehaviour, IDamageable
         thisRigidbody = GetComponent<Rigidbody>();
         thisTransform = GetComponent<Transform>();
         movementMap.Init(8);
+        myPlayer.minions.Add(this);
     }
 
     // Update is called once per frame
@@ -60,6 +71,11 @@ public class Minion : MonoBehaviour, IDamageable
         {
             myBarracks.OnUnitKilled(this);
         }
+        if(myPlayer != null)
+        {
+            myPlayer.minions.Remove(this);
+        }
+        Destroy(gameObject);
     }
 
     internal void SetBarracks(Barracks barracks)

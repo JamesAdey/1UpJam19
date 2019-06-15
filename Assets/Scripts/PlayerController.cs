@@ -27,12 +27,27 @@ public class PlayerController : MonoBehaviour
     Transform thisTransform;
     Rigidbody thisRigid;
 
+    TeamMatChanger[] matChangers;
+
     // Start is called before the first frame update
     void Start()
     {
         thisTransform = GetComponent<Transform>();
         brain = GetComponent<BaseBrain>();
         thisRigid = GetComponent<Rigidbody>();
+        UpdateVisuals();
+    }
+
+    private void UpdateVisuals()
+    {
+        if(matChangers == null)
+        {
+            matChangers = GetComponentsInChildren<TeamMatChanger>();
+        }
+        foreach (TeamMatChanger script in matChangers)
+        {
+            script.ChangeTeam(team);
+        }
     }
 
     void Shoot()
