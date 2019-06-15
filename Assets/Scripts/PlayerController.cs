@@ -80,7 +80,11 @@ public class PlayerController : MonoBehaviour
     {
         inputs = brain.GetInputs();
         timeSinceShoot += Time.deltaTime;
-        thisRigid.velocity = new Vector3(inputs.forwardBackwardInput * speed, thisRigid.velocity.y, -inputs.leftRightInput * speed);
+        Vector3 moveVel = (inputs.strafeDir * inputs.leftRightInput) + (inputs.walkDir * inputs.forwardBackwardInput);
+        moveVel.Normalize();
+        moveVel *= speed;
+        moveVel.y = thisRigid.velocity.y;
+        thisRigid.velocity = moveVel;
 
         Vector3 flattenedLookPos = inputs.lookPos;
         flattenedLookPos.y = thisTransform.position.y;

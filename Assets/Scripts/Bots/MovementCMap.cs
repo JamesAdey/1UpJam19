@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ContextBehaviourAI;
-using System;
 
 public class MovementCMap : ContextMap<float>
 {

@@ -21,6 +21,10 @@ public class HumanBrain : BaseBrain
         inputs.leftRightInput = Input.GetAxisRaw("Horizontal");
         inputs.forwardBackwardInput = Input.GetAxisRaw("Vertical");
 
+        inputs.walkDir = Vector3.ProjectOnPlane(cam.transform.forward,Vector3.up).normalized;
+        inputs.strafeDir = Vector3.ProjectOnPlane(cam.transform.right, Vector3.up).normalized;
+
+
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit, Mathf.Infinity))

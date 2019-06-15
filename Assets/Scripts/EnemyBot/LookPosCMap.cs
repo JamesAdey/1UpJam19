@@ -3,20 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using ContextBehaviourAI;
 
-enum BotKeys
+public class LookPosCMap : ContextMap<float>
 {
-    PRIMARY_ATTACK,
-    BUILD_MODE
-}
+    private Vector3[] values;
 
-class KeypressCMap : ContextMap<float>
-{
-    bool[] values;
     public override void Init(int size)
     {
-        size = 2;
+        size = 1;
         slots = new float[size];
-        values = new bool[size];
+        values = new Vector3[size];
     }
 
     public void Decay()
@@ -27,16 +22,16 @@ class KeypressCMap : ContextMap<float>
         }
     }
 
-    public void WriteKey(BotKeys key, bool value, float power)
+    public void WriteLookPos(Vector3 value, float power)
     {
-        int index = (int)key;
-        if(slots[index] > power)
+        int index = 0;
+        if (slots[index] > power)
         {
             values[index] = value;
         }
     }
 
-    public bool Evaluate()
+    public Vector3 Evaluate()
     {
         int index = 0;
         float highest = slots[0];
@@ -51,4 +46,5 @@ class KeypressCMap : ContextMap<float>
 
         return values[index];
     }
+
 }
