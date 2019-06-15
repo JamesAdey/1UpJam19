@@ -10,10 +10,16 @@ public class BulletScript : MonoBehaviour
     [SerializeField]
     public Vector3 targetPoint;
 
+    public DamageInfo damageInf =  new DamageInfo();
+
+    [SerializeField]
+    public int damage = 10;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        damageInf.damage = 10;
         if(target != null)
         {
             targetPoint = target.position;
@@ -30,6 +36,11 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        IDamageable obj = collision.gameObject.GetComponentInParent<IDamageable>();
+        if(obj != null)
+        {
+            obj.TakeDamage(damageInf);
+        }
         Destroy(gameObject);
     }
 }

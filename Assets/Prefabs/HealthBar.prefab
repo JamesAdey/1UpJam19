@@ -186,7 +186,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d811934bfa82c45ae5a2201d2ade6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthRectTrans: {fileID: 0}
+  thisRectTrans: {fileID: 0}
   percentHealth: 50
+  parentTransform: {fileID: 0}
 --- !u!1 &7197697004408474472
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,6 +201,7 @@ GameObject:
   - component: {fileID: 7197697004408474473}
   - component: {fileID: 7197697004408474475}
   - component: {fileID: 7197697004408474474}
+  - component: {fileID: 9032928722008063752}
   m_Layer: 5
   m_Name: MainBit
   m_TagString: Untagged
@@ -262,3 +266,19 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &9032928722008063752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7197697004408474472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d811934bfa82c45ae5a2201d2ade6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthRectTrans: {fileID: 7197697003992967013}
+  thisRectTrans: {fileID: 0}
+  percentHealth: 100
+  parentTransform: {fileID: 0}
