@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseBuilding : MonoBehaviour
+public abstract class BaseBuilding : MonoBehaviour , IDamageable
 {
 
     [SerializeField]
     public float blockingRadius;
+
+    [SerializeField]
+    public GameObject healthBar;
+
+    protected HealthBar health;
 
     public List<NavNode> nodes;
     public PlayerInput input;
@@ -59,4 +64,33 @@ public abstract class BaseBuilding : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, blockingRadius);
     }
 
+    public void TakeDamage(DamageInfo info)
+    {
+        if(health == null)
+        {
+            if(healthBar != null)
+            {
+                health = healthBar.GetComponent<HealthBar>();
+            }
+        }
+
+        health.inflictDamange(info.damage);
+
+        if (health.isDead())
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        NavMesh.singleton.UnstitchNodes(nodes);
+        GameManager.manager.GetPlayer(team).buildings.Remove(this);
+        Destroy(gameObject);
+    }
+
+    public Teams.Team GetTeam()
+    {
+        throw new System.NotImplementedException();
+    }
 }
