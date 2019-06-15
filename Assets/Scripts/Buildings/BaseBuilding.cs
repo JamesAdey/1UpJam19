@@ -19,6 +19,7 @@ public abstract class BaseBuilding : MonoBehaviour
     {
         Vector3 mousePos = input.lookPos;
         transform.position = mousePos;
+        transform.eulerAngles = input.buildingEuler;
     }
 
     protected bool InRange(Transform target, float range)

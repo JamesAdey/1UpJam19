@@ -14,14 +14,27 @@ public class SpawnButtonController : MonoBehaviour
     [SerializeField]
     GameObject buildMenu;
 
+    [SerializeField]
+    GameObject barracksPrefab;
+
     public void Start()
     {
         spawner = this;
     }
 
-    public void SpawnGhost()
+    public void SpawnTowerBasic()
     {
-        GameObject ghost = Instantiate(towerPrefab, Vector3.zero, Quaternion.identity);
+        SpawnGhost(towerPrefab);
+    }
+
+    public void SpawnBarracks()
+    {
+        SpawnGhost(barracksPrefab);
+    }
+
+    public void SpawnGhost(GameObject prefab)
+    {
+        GameObject ghost = Instantiate(prefab, Vector3.zero, Quaternion.identity);
         PlayerInput input = GameManager.manager.humanPlayer.brain.GetInputs();
         ghost.GetComponent<Ghost>().input = input;
         ghost.GetComponent<BaseBuilding>().team = Teams.Team.PLAYER;

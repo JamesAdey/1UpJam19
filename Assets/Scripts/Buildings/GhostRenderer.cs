@@ -21,11 +21,11 @@ public class GhostRenderer : MonoBehaviour
     {
         if (goodMat)
         {
-            render.material = goodMaterial;
+            render.sharedMaterial = goodMaterial;
         }
         else
         {
-            render.material = badMaterial;
+            render.sharedMaterial = badMaterial;
         }
         
     }
