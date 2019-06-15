@@ -45,6 +45,8 @@ public class Barracks : BaseBuilding
         GameObject go = Instantiate(unitPrefab, spawnPoint.position, spawnPoint.rotation);
         Minion m = go.GetComponent<Minion>();
         m.SetBarracks(this);
+        PlayerData myPlayer = GameManager.manager.GetPlayer(team);
+        m.SetOwningPlayer(myPlayer);
         units.Add(m);
         nextSpawnTime = Time.time + spawnDelay;
     }

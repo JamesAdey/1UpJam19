@@ -57,7 +57,12 @@ public class NavMesh : MonoBehaviour
         foreach (NavNode node in nodesToRemove)
         {
             node.DisconnectAll();
+            
+        }
+        foreach (NavNode node in nodesToRemove)
+        {
             nodes.Remove(node);
+
         }
     }
 #if UNITY_EDITOR

@@ -15,7 +15,9 @@ public class Minion : MonoBehaviour, IDamageable
     [SerializeField]
     private float health = 10;
     [SerializeField]
-    public float speed = 3;
+    private float speed = 3;
+    [SerializeField]
+    private float attackDelay = 1;
     [SerializeField]
     private float attackRange = 3;
     public float AttackRange => attackRange;
@@ -26,18 +28,20 @@ public class Minion : MonoBehaviour, IDamageable
     MovementCMap movementMap = new MovementCMap();
     AttackCMap attackMap = new AttackCMap();
     CB_ChaseTower chaseTowerBehaviour = new CB_ChaseTower();
-    CB_AttackEnemy attackEnemyBehavious = new CB_AttackEnemy();
+    CB_AttackEnemy attackEnemyBehaviour = new CB_AttackEnemy();
     
     public Vector3 desiredDir;
+    public bool doAttack;
+    private float nextAttackTime;
+
     private Barracks myBarracks;
-
     private PlayerData myPlayer;
+    
 
-    void SetOwningPlayer(PlayerData player)
+    public void SetOwningPlayer(PlayerData player)
     {
         myPlayer = player;
         myTeam = player.team;
-
     }
 
     // Start is called before the first frame update
@@ -53,11 +57,20 @@ public class Minion : MonoBehaviour, IDamageable
     void FixedUpdate()
     {
         movementMap.Decay();
+        attackMap.Decay();
         chaseTowerBehaviour.Process(movementMap, this);
+        attackEnemyBehaviour.Process(attackMap, this);
+
         desiredDir = movementMap.Evaluate();
         Vector3 vel = desiredDir * speed;
         vel.y = thisRigidbody.velocity.y;
         thisRigidbody.velocity = vel;
+
+        bool doAttack = attackMap.Evaluate();
+        if (doAttack)
+        {
+            Attack();
+        }
 
         if (health < 0)
         {
@@ -88,6 +101,12 @@ public class Minion : MonoBehaviour, IDamageable
 
     private void Attack()
     {
+        if(Time.time < nextAttackTime)
+        {
+            return;
+        }
+        nextAttackTime = Time.time + attackDelay;
+
         RaycastHit hit;
         if(Physics.Raycast(thisTransform.position, thisTransform.forward, out hit, attackRange))
         {

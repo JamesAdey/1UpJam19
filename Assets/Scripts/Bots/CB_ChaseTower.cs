@@ -33,7 +33,19 @@ public class CB_ChaseTower : ContextBehaviour<float>
             weights.Add(sqrMag);
         }
 
-        for(int i = 0; i < weights.Count; i++)
+        foreach (Minion enemyMinion in enemy.minions)
+        {
+            Vector3 dir = (enemyMinion.Position - m.Position);
+            float sqrMag = dir.sqrMagnitude;
+            if (sqrMag > highest)
+            {
+                highest = sqrMag;
+            }
+            directions.Add(dir);
+            weights.Add(sqrMag);
+        }
+
+        for (int i = 0; i < weights.Count; i++)
         {
             float strength = 1.01f - (weights[i] / highest);
             contextMap.WriteDirection(directions[i], strength);
