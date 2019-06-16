@@ -15,7 +15,7 @@ public class CB_WizardAttack : ContextBehaviour<float>
         throw new System.NotImplementedException();
     }
 
-    void Process(MovementCMap movementMap, KeypressCMap keyboardMap, LookPosCMap lookMap, PlayerController controller)
+    public void Process(MovementCMap movementMap, KeypressCMap keyboardMap, LookPosCMap lookMap, PlayerController controller)
     {
         PlayerData enemyPlayer = GameManager.manager.GetOpposingPlayer(controller.team);
         PlayerData myPlayer = GameManager.manager.GetPlayer(controller.team);
@@ -24,34 +24,34 @@ public class CB_WizardAttack : ContextBehaviour<float>
         // wizard move
         
         // do the movement
-        ProcessMovement(movementMap, lookMap, enemyPlayer, currentPos);
+        ProcessMovement(movementMap, lookMap, keyboardMap, enemyPlayer, currentPos);
         // Look at the thing we're moving towards
         // Press keys to do attacks
     }
 
-    private void ProcessMovement(MovementCMap movementMap, LookPosCMap lookMap, PlayerData enemyPlayer, Vector3 currentPos)
+    private void ProcessMovement(MovementCMap movementMap, LookPosCMap lookMap, KeypressCMap keyboardMap, PlayerData enemyPlayer, Vector3 currentPos)
     {
         moveDirections.Clear();
         moveWeights.Clear();
         lookDirections.Clear();
         float moveHighest = 1;
 
-        float closeRange = 25;
         // move towards enemy minions
         foreach (var minion in enemyPlayer.minions)
         {
             float sqrDist = (minion.Position - currentPos).sqrMagnitude;
             // LOOK at the minion
             MarkLookMap(minion.Position);
+            float closeSqrRange = Mathf.Min(100,sqrDist);
             // possibly MOVE away from it
-            if (sqrDist < closeRange)
+            if (sqrDist < closeSqrRange)
             {
-                MarkMovementMap(minion.Position, currentPos, moveHighest);
+                moveHighest = MarkMovementMap(minion.Position, currentPos, moveHighest);
                 
             }
             else
             {
-                MarkMovementMap(currentPos, minion.Position, moveHighest);
+                moveHighest = MarkMovementMap(currentPos, minion.Position, moveHighest);
             }
         }
 
@@ -60,14 +60,18 @@ public class CB_WizardAttack : ContextBehaviour<float>
         {
             // LOOK at the building
             MarkLookMap(building.GetPosition());
+
+            float sqrDist = (building.GetPosition() - currentPos).sqrMagnitude;
+            float closeRange = Mathf.Max(10, building.blockingRadius);
+            float buildingCloseSqrd = closeRange * closeRange;
             // possibly MOVE away from it
-            if (building is TowerBasic)
+            if (building is TowerBasic || sqrDist < buildingCloseSqrd)
             {
-                MarkMovementMap(building.GetPosition(), currentPos, moveHighest);
+                moveHighest = MarkMovementMap(building.GetPosition(), currentPos, moveHighest);
             }
             else
             {
-                MarkMovementMap(currentPos, building.GetPosition(), moveHighest);
+                moveHighest = MarkMovementMap(currentPos, building.GetPosition(), moveHighest);
             }
         }
 
@@ -76,6 +80,8 @@ public class CB_WizardAttack : ContextBehaviour<float>
         {
             float strength = 1.01f - (moveWeights[i] / moveHighest);
             movementMap.WriteDirection(moveDirections[i], strength);
+            lookMap.WriteLookPos(lookDirections[i], strength);
+            keyboardMap.WriteKey(BotKeys.PRIMARY_ATTACK, true, strength);
         }
     }
 

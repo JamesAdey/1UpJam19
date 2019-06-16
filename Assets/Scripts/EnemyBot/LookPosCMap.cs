@@ -25,8 +25,9 @@ public class LookPosCMap : ContextMap<float>
     public void WriteLookPos(Vector3 value, float power)
     {
         int index = 0;
-        if (slots[index] > power)
+        if (slots[index] < power)
         {
+            slots[index] = power;
             values[index] = value;
         }
     }
