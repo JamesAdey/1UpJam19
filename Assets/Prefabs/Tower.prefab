@@ -454,7 +454,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7563192733671129351, guid: f5198efe543f6b245bd54f911ad3aae7,
     type: 3}
   shoot: {fileID: 5830228955390108202}
-  range: 7
+  range: 15
   shootTime: 0.5
 --- !u!1 &5830228955390108203
 GameObject:
@@ -580,6 +580,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7197697004408474472, guid: 20e9f6a08aa922e4897325e14352303b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7197697003130758750, guid: 20e9f6a08aa922e4897325e14352303b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -685,11 +690,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7197697004408474472, guid: 20e9f6a08aa922e4897325e14352303b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7197697004408474473, guid: 20e9f6a08aa922e4897325e14352303b,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -699,6 +699,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9032928722008063752, guid: 20e9f6a08aa922e4897325e14352303b,
+        type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 5830228955307851745}
+    - target: {fileID: 9032928722008063752, guid: 20e9f6a08aa922e4897325e14352303b,
+        type: 3}
+      propertyPath: maxHealth
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7197697003992967013, guid: 20e9f6a08aa922e4897325e14352303b,
         type: 3}
@@ -721,11 +731,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5830228955307851745}
     - target: {fileID: 654017315299913469, guid: 20e9f6a08aa922e4897325e14352303b,
-        type: 3}
-      propertyPath: parentTransform
-      value: 
-      objectReference: {fileID: 5830228955307851745}
-    - target: {fileID: 9032928722008063752, guid: 20e9f6a08aa922e4897325e14352303b,
         type: 3}
       propertyPath: parentTransform
       value: 
