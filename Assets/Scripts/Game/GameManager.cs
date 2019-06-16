@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     public List<PlayerData> players = new List<PlayerData>();
 
+    public List<Resource> resources = new List<Resource>();
+
     public PlayerData humanPlayer;
 
     public Text endText;

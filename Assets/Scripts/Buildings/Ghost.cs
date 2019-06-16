@@ -89,6 +89,15 @@ public class Ghost : BaseBuilding
             {
                 return true;
             }
+
+            // CHECK RESOURCES ROCKS
+            foreach(Resource resource in GameManager.manager.resources)
+            {
+                if((InRange(resource.thisTransform.position, blockingRadius)))
+                {
+                    return true;
+                }
+            }
         }
         return false;
     }

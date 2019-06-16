@@ -36,9 +36,7 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
         IDamageable obj = collision.gameObject.GetComponentInParent<IDamageable>();
-        Debug.Log(obj);
         if(obj != null)
         {
             obj.TakeDamage(damageInf);
