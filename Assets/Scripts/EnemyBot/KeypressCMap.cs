@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using ContextBehaviourAI;
 
-enum BotKeys
+public enum BotKeys
 {
     PRIMARY_ATTACK,
     BUILD_MODE
 }
 
-class KeypressCMap : ContextMap<float>
+public class KeypressCMap : ContextMap<float>
 {
     bool[] values;
     public override void Init(int size)
@@ -30,8 +30,9 @@ class KeypressCMap : ContextMap<float>
     public void WriteKey(BotKeys key, bool value, float power)
     {
         int index = (int)key;
-        if(slots[index] > power)
+        if(slots[index] < power)
         {
+            slots[index] = power;
             values[index] = value;
         }
     }
@@ -50,5 +51,10 @@ class KeypressCMap : ContextMap<float>
         }
 
         return values[index];
+    }
+
+    public bool GetKeyPress(BotKeys key)
+    {
+        return values[(int)key];
     }
 }

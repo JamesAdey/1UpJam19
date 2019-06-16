@@ -89,7 +89,7 @@ public class Minion : MonoBehaviour, IDamageable
 
         desiredDir.y = 0;
         Quaternion desiredRot = Quaternion.LookRotation(desiredDir);
-        thisRigidbody.rotation = Quaternion.RotateTowards(thisRigidbody.rotation, desiredRot,90*Time.deltaTime);
+        thisRigidbody.rotation = Quaternion.RotateTowards(thisRigidbody.rotation, desiredRot,360*Time.deltaTime);
 
         doAttack = attackMap.Evaluate();
         if (doAttack)

@@ -56,8 +56,9 @@ public class TowerBasic : BaseBuilding
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
+        
         mostRecentShoot -= Time.deltaTime;
 
         if(mostRecentShoot < 0)
@@ -65,6 +66,7 @@ public class TowerBasic : BaseBuilding
             mostRecentShoot = shootTime;
             ShootAtTarget();
         }
+        base.Update();
     }
 
     public override Vector3 GetPosition()
