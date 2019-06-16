@@ -280,12 +280,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTeam: 2
-  health: 10
+  health: 20
   speed: 3
   attackDelay: 0.5
   attackRange: 3
   damage:
-    damage: 0
+    damage: 5
   desiredDir: {x: 0, y: 0, z: 0}
   doAttack: 0
 --- !u!114 &1771772263585991004

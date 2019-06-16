@@ -7,7 +7,11 @@ public class Resource : MonoBehaviour
     [SerializeField]
     public int capacity;
 
+    public int maxCap;
 
+    public float timeSinceDeplete = 0;
+
+    public float regenTime = 30;
 
     public GhostRenderer thisRenderer;
 
@@ -15,6 +19,7 @@ public class Resource : MonoBehaviour
 
     private void Start()
     {
+        maxCap = capacity;
         thisTransform = GetComponent<Transform>();
         thisRenderer = GetComponentInChildren<GhostRenderer>();
         GameManager.manager.resources.Add(this);
@@ -30,6 +35,18 @@ public class Resource : MonoBehaviour
         else{
             thisRenderer.SetMat(true);
         }
+
+        if(capacity == 0)
+        {
+            timeSinceDeplete += Time.deltaTime;
+
+            if(timeSinceDeplete >= regenTime)
+            {
+                capacity = maxCap;
+                timeSinceDeplete = 0;
+            }
+        }
+
     }
 
     public int depleteResource()
