@@ -25,6 +25,10 @@ public class HealthBar : MonoBehaviour
         myHealth = maxHealth;
         thisRectTrans = GetComponent<RectTransform>();
         thisRectTrans.position = new Vector3(700, 700, 700);
+
+        Vector3 scale = healthRectTrans.localScale;
+        scale.x = myHealth / maxHealth;
+        healthRectTrans.localScale = scale;
     }
 
     public void Update()
