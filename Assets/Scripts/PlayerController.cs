@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour , IDamageable
         thisRigid = GetComponent<Rigidbody>();
         health = healthBar.GetComponent<HealthBar>();
         health.parentTransform = thisTransform;
-        health.maxHealth = 1000;
+        health.maxHealth = 300;
         UpdateVisuals();
     }
 
