@@ -15,6 +15,9 @@ public class Ghost : BaseBuilding
     [SerializeField]
     GameObject nonGhostPrefab;
 
+    [SerializeField]
+    int resourceCost;
+
     Transform thisTransform;
     private void Start()
     {
@@ -54,9 +57,15 @@ public class Ghost : BaseBuilding
 
         if (input.primaryAttack && canPlace)
         {
+            GameManager.manager.GetPlayer(team).resources -= resourceCost;
             GameObject nonGhost = Instantiate(nonGhostPrefab, transform.position, transform.rotation);
             nonGhost.GetComponent<BaseBuilding>().input = input;
             nonGhost.GetComponent<BaseBuilding>().team = team;
+            Destroy(gameObject);
+        }
+
+        if (input.escape)
+        {
             Destroy(gameObject);
         }
     }
@@ -97,6 +106,12 @@ public class Ghost : BaseBuilding
                 {
                     return true;
                 }
+            }
+
+            //CHECK FUNDS
+            if (GameManager.manager.GetPlayer(team).resources < resourceCost)
+            {
+                return true;
             }
         }
         return false;

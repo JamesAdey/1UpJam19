@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockingRadius: 8
+  healthBar: {fileID: 0}
   nodes: []
   input:
     walkDir: {x: 0, y: 0, z: 0}
@@ -62,6 +63,7 @@ MonoBehaviour:
   canPlace: 0
   nonGhostPrefab: {fileID: 2249725283029017073, guid: 7809ab138f6aa4f429e6bbba8997a213,
     type: 3}
+  resourceCost: 50
 --- !u!1 &2249725283029017075
 GameObject:
   m_ObjectHideFlags: 0

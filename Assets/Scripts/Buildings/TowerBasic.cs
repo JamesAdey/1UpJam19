@@ -62,6 +62,7 @@ public class TowerBasic : BaseBuilding
     {
         GameObject bullet = Instantiate(bulletPrefab, shoot.position, Quaternion.identity);
         bullet.GetComponent<BulletScript>().target = trans;
+        bullet.GetComponent<BulletScript>().team = team;
     }
 
     // Update is called once per frame

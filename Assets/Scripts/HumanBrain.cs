@@ -50,6 +50,8 @@ public class HumanBrain : BaseBrain
             inputs.buildingEuler.y -= 360;
         }
 
+        inputs.escape = Input.GetKeyUp(KeyCode.Escape);
+
 
         inputs.primaryAttack = Input.GetMouseButton(0);
     }
