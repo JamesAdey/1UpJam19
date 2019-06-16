@@ -13,5 +13,6 @@ public class PlayerInput
     public bool primaryAttack;
     public bool buildMode;
     public Vector3 buildingEuler;
+    public bool escape;
     
 }

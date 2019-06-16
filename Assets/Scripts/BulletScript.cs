@@ -13,7 +13,7 @@ public class BulletScript : MonoBehaviour
     [SerializeField]
     public Vector3 targetPoint;
 
-    public Teams.Team team = Teams.Team.PLAYER;
+    public Teams.Team team;
 
     public DamageInfo damageInf =  new DamageInfo();
 
