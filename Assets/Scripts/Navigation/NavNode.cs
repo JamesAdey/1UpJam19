@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,11 +7,17 @@ public class NavNode : MonoBehaviour
 {
 
     [SerializeField]
-    private List<NavNode> neighbours = new List<NavNode>();
+    internal List<NavNode> neighbours = new List<NavNode>();
     private Transform thisTransform;
 
     public Vector3 Position { get { return thisTransform.position; } }
-
+    
+    // BEGIN NAV DATA
+    public bool isClosed;
+    public bool isUnseen;
+    public float distToGoal;
+    public NavNode parentNode;
+    // END NAV DATA
     // Start is called before the first frame update
     void Awake()
     {
@@ -24,6 +31,14 @@ public class NavNode : MonoBehaviour
             neighbours.Add(other);
             other.Connect(this);
         }
+    }
+
+    internal void ResetPathingData()
+    {
+        isClosed = false;
+        isUnseen = true;
+        distToGoal = float.MaxValue;
+        parentNode = null;
     }
 
     public void Disconnect(NavNode other)

@@ -27,6 +27,65 @@ public class NavMesh : MonoBehaviour
     }
 
 
+    public List<Vector3> FindPath(Vector3 from, Vector3 to)
+    {
+        foreach (NavNode node in nodes)
+        {
+            node.ResetPathingData();
+        }
+        NavNode startNode = NearestNodeTo(from);
+        NavNode endNode = NearestNodeTo(to);
+
+        List<NavNode> openList = new List<NavNode>();
+        openList.Add(startNode);
+        startNode.isUnseen = false;
+
+        while (!endNode.isUnseen)
+        {
+
+            NavNode current = openList[0];
+            openList.RemoveAt(0);
+
+            foreach (NavNode node in current.neighbours)
+            {
+                if (node.isUnseen)
+                {
+                    openList.Add(node);
+                    node.isUnseen = false;
+                    node.parentNode = current;
+                }
+            }
+        }
+
+        NavNode next = endNode;
+        List<Vector3> path = new List<Vector3>();
+        while (next != null)
+        {
+            path.Add(next.Position);
+            next = next.parentNode;
+        }
+        return path;
+    }
+
+    private NavNode NearestNodeTo(Vector3 pos)
+    {
+        float shortest = float.MaxValue;
+        NavNode closest = null;
+        foreach (NavNode node in nodes)
+        {
+            float sqrDist = (pos - node.Position).sqrMagnitude;
+            if (sqrDist < shortest)
+            {
+                if (Physics.Linecast(pos, node.Position))
+                {
+                    continue;   // skip if obscured
+                }
+                shortest = sqrDist;
+                closest = node;
+            }
+        }
+        return closest;
+    }
 
     public void StitchNodes(List<NavNode> newNodes)
     {
@@ -57,7 +116,7 @@ public class NavMesh : MonoBehaviour
         foreach (NavNode node in nodesToRemove)
         {
             node.DisconnectAll();
-            
+
         }
         foreach (NavNode node in nodesToRemove)
         {
@@ -71,7 +130,7 @@ public class NavMesh : MonoBehaviour
     public static void VerifyNeighbours()
     {
         NavNode[] allNodes = GameObject.FindObjectsOfType<NavNode>();
-        foreach(NavNode node in allNodes)
+        foreach (NavNode node in allNodes)
         {
             node.VerifyNeighbours();
         }
