@@ -47,6 +47,10 @@ public class CB_WizardResources : ContextBehaviour<float>
 
         foreach (var res in GameManager.manager.resources)
         {
+            if (res.capacity <= 0)
+            {
+                continue;
+            }
             Vector3 resourcePos = res.thisTransform.position;
             MarkLookMap(resourcePos);
             moveHighest = MarkMovementMap(currentPos, resourcePos, moveHighest);

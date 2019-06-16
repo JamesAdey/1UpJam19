@@ -8,7 +8,6 @@ public class CB_WizardBuild : ContextBehaviour<float>
 
     int totalEnemyBuildings = 0;
     int totalMyBuildings = 0;
-    bool wantBuild = false;
 
     public override void Process(ContextMap<float> map)
     {
@@ -53,19 +52,10 @@ public class CB_WizardBuild : ContextBehaviour<float>
             }
         }
 
-        if(totalEnemyBuildings >= totalMyBuildings)
-        {
-            wantBuild = true;
-        }
-        else
-        {
-            wantBuild = false;
-        }
-
         if(towerCount > 0 && myPlayer.resources > 25)
         {
             Vector3 buildPos = GetBuildPos(myPlayer, enemyPlayer);
-            lookMap.WriteLookPos(buildPos, 3);
+            lookMap.WriteLookPos(buildPos, 3+towerCount);
             keyboardMap.WriteKey(BotKeys.BUILD_MODE, true, 1);
             keyboardMap.WriteKey(BotKeys.PRIMARY_ATTACK, true, 1);
             myPlayer.brain.SetDesiredBuilding(BuildingType.TOWER);
@@ -73,7 +63,7 @@ public class CB_WizardBuild : ContextBehaviour<float>
         else if(barracksCount > 0 && myPlayer.resources > 50)
         {
             Vector3 buildPos = GetBuildPos(myPlayer, enemyPlayer);
-            lookMap.WriteLookPos(buildPos,3);
+            lookMap.WriteLookPos(buildPos,3+barracksCount);
             keyboardMap.WriteKey(BotKeys.BUILD_MODE, true, 1);
             keyboardMap.WriteKey(BotKeys.PRIMARY_ATTACK, true, 1);
             myPlayer.brain.SetDesiredBuilding(BuildingType.BARRACKS);
@@ -100,20 +90,5 @@ public class CB_WizardBuild : ContextBehaviour<float>
         buildPos.x = Mathf.Clamp(buildPos.x, -30, 30);
         buildPos.z = Mathf.Clamp(buildPos.z, -40, 40);
         return buildPos;
-    }
-    
-
-    
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

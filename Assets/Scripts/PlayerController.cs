@@ -119,6 +119,17 @@ public class PlayerController : MonoBehaviour, IDamageable
             {
                 SpawnButtonController.spawner.PlayerEnterMode(Mode.BUILD, Teams.Team.AI);
                 AIBuild(inputs.desiredBuilding,inputs.lookPos,inputs.buildingEuler);
+                inputs.buildMode = false;
+                SpawnButtonController.spawner.PlayerEnterMode(Mode.GAME, Teams.Team.AI);
+                PlayerData myPlayer = GameManager.manager.GetPlayer(Teams.Team.AI);
+                if (inputs.desiredBuilding == BuildingType.BARRACKS)
+                {
+                    myPlayer.resources -= 50;
+                }
+                if(inputs.desiredBuilding == BuildingType.TOWER)
+                    {
+                    myPlayer.resources -= 25;
+                }
             }
 
         }
