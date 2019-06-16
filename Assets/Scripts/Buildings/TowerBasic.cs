@@ -13,7 +13,7 @@ public class TowerBasic : BaseBuilding
 
     [SerializeField]
     float range;
-    
+
     float mostRecentShoot = 0;
 
     [SerializeField]
@@ -40,28 +40,37 @@ public class TowerBasic : BaseBuilding
 
     void ShootAtTarget()
     {
-        foreach(PlayerData player in GameManager.manager.players)
+        PlayerData enemyPlayer = GameManager.manager.GetOpposingPlayer(team);
+        foreach (Minion minion in enemyPlayer.minions)
         {
-            Teams.Team enemyTeam = Teams.GetEnemyTeam(team);
-            if (enemyTeam == Teams.Team.NONE || player.team == enemyTeam)
+            if (InRange(minion.Position, range))
             {
-                if (InRange(player.controller.transform, range))
-                {
-                    GameObject bullet = Instantiate(bulletPrefab, shoot.position, Quaternion.identity);
-                    bullet.GetComponent<BulletScript>().target = player.controller.transform;
-                }
+                FireAtTransform(minion.transform);
+                return;
             }
         }
 
+        if (InRange(enemyPlayer.controller.transform, range))
+        {
+            FireAtTransform(enemyPlayer.controller.transform);
+            return;
+        }
+
+    }
+
+    void FireAtTransform(Transform trans)
+    {
+        GameObject bullet = Instantiate(bulletPrefab, shoot.position, Quaternion.identity);
+        bullet.GetComponent<BulletScript>().target = trans;
     }
 
     // Update is called once per frame
     public override void Update()
     {
-        
+
         mostRecentShoot -= Time.deltaTime;
 
-        if(mostRecentShoot < 0)
+        if (mostRecentShoot < 0)
         {
             mostRecentShoot = shootTime;
             ShootAtTarget();
