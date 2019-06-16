@@ -45,8 +45,6 @@ public class BulletScript : MonoBehaviour
         if(obj != null)
         {
             obj.TakeDamage(damageInf);
-            return;
-
         }
 
         Resource res = collision.gameObject.GetComponentInParent<Resource>();
@@ -55,8 +53,6 @@ public class BulletScript : MonoBehaviour
             int resPoints = res.depleteResource();
 
             GameManager.manager.AddResources(resPoints, team);
-            
-            return;
         }
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);

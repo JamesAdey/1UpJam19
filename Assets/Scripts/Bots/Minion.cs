@@ -4,40 +4,39 @@ using UnityEngine;
 using ContextBehaviourAI;
 using System;
 
-public class Minion : MonoBehaviour, IDamageable
+public abstract class Minion : MonoBehaviour, IDamageable
 {
     Vector3 moveDir;
     Rigidbody thisRigidbody;
     Transform thisTransform;
 
     [SerializeField]
-    private Teams.Team myTeam = Teams.Team.NONE;
+    protected Teams.Team myTeam = Teams.Team.NONE;
     [SerializeField]
-    private float health = 10;
+    protected float health = 10;
     [SerializeField]
-    private float speed = 3;
+    protected float speed = 3;
     [SerializeField]
-    private float attackDelay = 0.5f;
+    protected float attackDelay = 0.5f;
     [SerializeField]
-    private float attackRange = 3;
+    protected float attackRange = 3;
     public float AttackRange => attackRange;
     [SerializeField]
-    private DamageInfo damage;
+    protected DamageInfo damage;
 
 
-    MovementCMap movementMap = new MovementCMap();
-    AttackCMap attackMap = new AttackCMap();
-    CB_ChaseTower chaseTowerBehaviour = new CB_ChaseTower();
-    CB_AttackEnemy attackEnemyBehaviour = new CB_AttackEnemy();
+    protected MovementCMap movementMap = new MovementCMap();
+    protected AttackCMap attackMap = new AttackCMap();
+    
     
     public Vector3 desiredDir;
     public bool doAttack;
-    private float nextAttackTime;
+    protected float nextAttackTime;
 
-    private Barracks myBarracks;
-    private PlayerData myPlayer;
+    protected Barracks myBarracks;
+    protected PlayerData myPlayer;
 
-    private TeamMatChanger[] matChangers;
+    protected TeamMatChanger[] matChangers;
 
     public void SetOwningPlayer(PlayerData player)
     {
@@ -71,15 +70,15 @@ public class Minion : MonoBehaviour, IDamageable
         }
     }
 
-    
+    public abstract void MinionFixedUpdate();
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        MinionFixedUpdate();
         movementMap.Decay();
         attackMap.Decay();
-        chaseTowerBehaviour.Process(movementMap, this);
-        attackEnemyBehaviour.Process(attackMap, this);
+        
 
         desiredDir = movementMap.Evaluate();
         Vector3 vel = desiredDir * speed;
@@ -103,7 +102,7 @@ public class Minion : MonoBehaviour, IDamageable
         }
     }
 
-    private void OnDeath()
+    protected void OnDeath()
     {
         if (myBarracks != null)
         {
@@ -129,7 +128,7 @@ public class Minion : MonoBehaviour, IDamageable
 
     public Vector3 Position => thisTransform.position;
 
-    private void Attack()
+    protected virtual void Attack()
     {
         if(Time.time < nextAttackTime)
         {
