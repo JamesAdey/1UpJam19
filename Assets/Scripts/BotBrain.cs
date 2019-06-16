@@ -13,6 +13,7 @@ public class BotBrain : BaseBrain
     LookPosCMap lookMap = new LookPosCMap();
     CB_WizardAttack attackBehaviour = new CB_WizardAttack();
     CB_WizardResources resourceBehaviour = new CB_WizardResources();
+    CB_WizardBuild buildBehaviour = new CB_WizardBuild();
 
     private Transform thisTransform;
     public Vector3 moveDir;
@@ -52,6 +53,7 @@ public class BotBrain : BaseBrain
         PlayerData player = GameManager.manager.GetPlayer(Teams.Team.AI);
         attackBehaviour.Process(movementMap, keyboardMap, lookMap, player.controller);
         resourceBehaviour.Process(movementMap, keyboardMap, lookMap, player.controller);
+        buildBehaviour.Process(movementMap, keyboardMap, lookMap, player.controller);
 
         // evaluate keys
         inputs.primaryAttack = keyboardMap.GetKeyPress(BotKeys.PRIMARY_ATTACK);
@@ -66,6 +68,29 @@ public class BotBrain : BaseBrain
         inputs.lookPos = lookMap.Evaluate();
         // update our inputs with movement behaviours
 
+        PlayerData enemyPlayer = GameManager.manager.GetOpposingPlayer(Teams.Team.AI);
+        Vector3 buildAngles = GetBuildingEulers(inputs.lookPos, enemyPlayer);
+        inputs.buildingEuler = buildAngles;
+        inputs.desiredBuilding = desiredBuildingType;
+
+    }
+
+    
+
+    Vector3 GetBuildingEulers(Vector3 buildPos, PlayerData enemyPlayer)
+    {
+        Vector3 endPos = Vector3.zero;
+        foreach (BaseBuilding b in enemyPlayer.buildings)
+        {
+            if (b is MainTower)
+            {
+                endPos = b.GetPosition();
+                break;
+            }
+        }
+        endPos.y = buildPos.y;
+        Vector3 dir = endPos - buildPos;
+        return Quaternion.LookRotation(dir, Vector3.up).eulerAngles;
     }
 
 

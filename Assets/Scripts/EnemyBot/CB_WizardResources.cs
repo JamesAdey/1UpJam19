@@ -26,7 +26,7 @@ public class CB_WizardResources : ContextBehaviour<float>
         float desire = 3;
         if (myPlayer.resources > 0)
         {
-            desire = (enemyPlayer.resources + 10) / myPlayer.resources;
+            desire = (enemyPlayer.resources + 50) / myPlayer.resources;
         }
 
 

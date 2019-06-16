@@ -35,7 +35,9 @@ public class SpawnButtonController : MonoBehaviour
     public void SpawnGhost(GameObject prefab, Teams.Team team)
     {
         GameObject ghost = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-        PlayerInput input = GameManager.manager.humanPlayer.brain.GetInputs();
+        PlayerData data = GameManager.manager.GetPlayer(team);
+        PlayerInput input = data.brain.GetInputs();
+
         ghost.GetComponent<Ghost>().input = input;
         ghost.GetComponent<BaseBuilding>().team = team;
         ghost.GetComponent<BaseBuilding>().SnapToMouse();
