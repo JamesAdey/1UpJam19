@@ -5,6 +5,9 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     [SerializeField]
+    private GameObject explosionPrefab;
+
+    [SerializeField]
     public Transform target;
 
     [SerializeField]
@@ -55,6 +58,7 @@ public class BulletScript : MonoBehaviour
             
             return;
         }
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }
