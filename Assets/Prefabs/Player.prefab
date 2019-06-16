@@ -213,6 +213,7 @@ MonoBehaviour:
     primaryAttack: 0
     buildMode: 0
     buildingEuler: {x: 0, y: 0, z: 0}
+    escape: 0
   bulletPrefab: {fileID: 7563192733671129351, guid: f5198efe543f6b245bd54f911ad3aae7,
     type: 3}
   timeSinceShoot: 0
