@@ -42,7 +42,6 @@ public class BulletScript : MonoBehaviour
         if(obj != null)
         {
             obj.TakeDamage(damageInf);
-            Destroy(gameObject);
             return;
 
         }
@@ -53,8 +52,9 @@ public class BulletScript : MonoBehaviour
             int resPoints = res.depleteResource();
 
             GameManager.manager.AddResources(resPoints, team);
-            Destroy(gameObject);
+            
             return;
         }
+        Destroy(gameObject);
     }
 }

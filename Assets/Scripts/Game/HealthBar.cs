@@ -29,7 +29,10 @@ public class HealthBar : MonoBehaviour
 
     public void Update()
     {
-
+        if(parentTransform == null)
+        {
+            return;
+        }
         Vector3 scale = healthRectTrans.localScale;
         scale.x = myHealth / maxHealth;
         healthRectTrans.localScale = scale;
