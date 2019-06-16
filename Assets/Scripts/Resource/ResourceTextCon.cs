@@ -8,6 +8,9 @@ public class ResourceTextCon : MonoBehaviour
 
     Text goldText;
 
+    [SerializeField]
+    Teams.Team team;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +20,6 @@ public class ResourceTextCon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        goldText.text = GameManager.manager.GetPlayer(Teams.Team.PLAYER).resources.ToString();
+        goldText.text = GameManager.manager.GetPlayer(team).resources.ToString();
     }
 }
