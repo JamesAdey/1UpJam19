@@ -5394,6 +5394,11 @@ PrefabInstance:
       propertyPath: parentTransform
       value: 
       objectReference: {fileID: 6284806749942137795}
+    - target: {fileID: 9032928722008063752, guid: 20e9f6a08aa922e4897325e14352303b,
+        type: 3}
+      propertyPath: maxHealth
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20e9f6a08aa922e4897325e14352303b, type: 3}
 --- !u!1 &1953037749313228501 stripped

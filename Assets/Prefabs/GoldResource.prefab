@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5307809493592284589}
+  - component: {fileID: 473136111}
   m_Layer: 0
   m_Name: GoldResource
   m_TagString: Untagged
@@ -31,6 +32,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &473136111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2827306742888868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c233e4e204e145d489a1fb49cab2b7a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capacity: 100
+  thisRenderer: {fileID: 0}
+  thisTransform: {fileID: 0}
 --- !u!1 &857939862233381525
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,6 +58,7 @@ GameObject:
   - component: {fileID: 857939862233736885}
   - component: {fileID: 857939862234506901}
   - component: {fileID: 857939862235636821}
+  - component: {fileID: 6007391511207722533}
   - component: {fileID: 857939862239663157}
   m_Layer: 0
   m_Name: goldrocks
@@ -109,6 +126,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &6007391511207722533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857939862233381525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 320b02b8f5243a74081de1ff48d87824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goodMaterial: {fileID: 2100000, guid: ddc248afa3ee1e54eb3672723d264238, type: 2}
+  badMaterial: {fileID: 2100000, guid: 731b69deac44afd488911952cd78a904, type: 2}
 --- !u!64 &857939862239663157
 MeshCollider:
   m_ObjectHideFlags: 0
