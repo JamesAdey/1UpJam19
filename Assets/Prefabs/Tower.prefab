@@ -705,6 +705,11 @@ PrefabInstance:
       propertyPath: parentTransform
       value: 
       objectReference: {fileID: 5830228955307851745}
+    - target: {fileID: 9032928722008063752, guid: 20e9f6a08aa922e4897325e14352303b,
+        type: 3}
+      propertyPath: maxHealth
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 7197697003992967013, guid: 20e9f6a08aa922e4897325e14352303b,
         type: 3}
       propertyPath: m_SizeDelta.x
