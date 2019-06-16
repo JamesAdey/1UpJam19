@@ -72,4 +72,9 @@ public class Barracks : BaseBuilding
     {
         return thisTransform.position;
     }
+
+    public override float GetAttackRange()
+    {
+        return 0;
+    }
 }

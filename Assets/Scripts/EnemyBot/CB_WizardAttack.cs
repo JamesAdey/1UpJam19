@@ -62,10 +62,10 @@ public class CB_WizardAttack : ContextBehaviour<float>
             MarkLookMap(building.GetPosition());
 
             float sqrDist = (building.GetPosition() - currentPos).sqrMagnitude;
-            float closeRange = Mathf.Max(10, building.blockingRadius);
-            float buildingCloseSqrd = closeRange * closeRange;
+            float closeRange = Mathf.Max(building.GetAttackRange()+1, building.blockingRadius);
+            bool tooClose = sqrDist < (closeRange * closeRange);
             // possibly MOVE away from it
-            if (building is TowerBasic || sqrDist < buildingCloseSqrd)
+            if (tooClose)
             {
                 moveHighest = MarkMovementMap(building.GetPosition(), currentPos, moveHighest);
             }

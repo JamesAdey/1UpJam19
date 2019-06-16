@@ -38,4 +38,9 @@ public class MainTower : BaseBuilding
         base.Die();
         GameManager.manager.EndGame(GameManager.GetOpposingTeam(team));
     }
+
+    public override float GetAttackRange()
+    {
+        return 0;
+    }
 }

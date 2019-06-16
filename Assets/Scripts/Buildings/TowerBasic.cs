@@ -83,4 +83,9 @@ public class TowerBasic : BaseBuilding
     {
         return thisTransform.position;
     }
+
+    public override float GetAttackRange()
+    {
+        return range;
+    }
 }

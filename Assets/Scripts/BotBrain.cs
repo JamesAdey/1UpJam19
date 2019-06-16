@@ -90,6 +90,10 @@ public class BotBrain : BaseBrain
         }
         endPos.y = buildPos.y;
         Vector3 dir = endPos - buildPos;
+        if(dir == Vector3.zero)
+        {
+            return Vector3.zero;
+        }
         return Quaternion.LookRotation(dir, Vector3.up).eulerAngles;
     }
 

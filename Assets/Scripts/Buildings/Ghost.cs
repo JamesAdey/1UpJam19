@@ -121,4 +121,9 @@ public class Ghost : BaseBuilding
     {
         return thisTransform.position;
     }
+
+    public override float GetAttackRange()
+    {
+        return 0;
+    }
 }

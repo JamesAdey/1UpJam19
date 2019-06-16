@@ -20,14 +20,18 @@ public class BulletScript : MonoBehaviour
     [SerializeField]
     public int damage = 10;
 
+    void Awake()
+    {
+        damageInf.damage = 10;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        damageInf.damage = 10;
         if(target != null)
         {
             targetPoint = target.position;
+            
         }
         transform.LookAt(targetPoint);
         GetComponent<Rigidbody>().velocity = transform.forward * 50;
@@ -41,9 +45,12 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        
         IDamageable obj = collision.gameObject.GetComponentInParent<IDamageable>();
         if(obj != null)
         {
+            Debug.Log(collision.gameObject.name);
+            damageInf.damage = damage;
             obj.TakeDamage(damageInf);
         }
 

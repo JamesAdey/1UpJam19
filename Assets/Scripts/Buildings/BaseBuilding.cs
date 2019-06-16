@@ -19,6 +19,7 @@ public abstract class BaseBuilding : MonoBehaviour , IDamageable
     public Teams.Team team;
 
     public abstract Vector3 GetPosition();
+    public abstract float GetAttackRange();
 
     private TeamMatChanger[] matChangers;
 
