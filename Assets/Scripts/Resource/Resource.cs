@@ -32,15 +32,16 @@ public class Resource : MonoBehaviour
         }
     }
 
-    public bool depleteResource()
+    public int depleteResource()
     {
         if(capacity != 0)
         {
             capacity -= 5;
-            return true;
+            return 5;
         }
 
-        return false;
+        return 0;
+    
         
     }
 

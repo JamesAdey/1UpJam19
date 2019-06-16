@@ -47,6 +47,13 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
+    public void AddResources(int numResources, Teams.Team team)
+    {
+        PlayerData player = GetPlayer(team);
+
+        player.resources += numResources;
+    }
+
     public static Teams.Team GetOpposingTeam(Teams.Team t)
     {
         if(t == Teams.Team.PLAYER)

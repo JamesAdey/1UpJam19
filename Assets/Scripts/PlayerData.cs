@@ -12,4 +12,5 @@ public class PlayerData
     public BaseBrain brain;
     public Teams.Team team;
     public Material material;
+    public int resources;
 }

@@ -10,6 +10,8 @@ public class BulletScript : MonoBehaviour
     [SerializeField]
     public Vector3 targetPoint;
 
+    public Teams.Team team = Teams.Team.PLAYER;
+
     public DamageInfo damageInf =  new DamageInfo();
 
     [SerializeField]
@@ -40,7 +42,19 @@ public class BulletScript : MonoBehaviour
         if(obj != null)
         {
             obj.TakeDamage(damageInf);
+            Destroy(gameObject);
+            return;
+
         }
-        Destroy(gameObject);
+
+        Resource res = collision.gameObject.GetComponentInParent<Resource>();
+        if(res != null)
+        {
+            int resPoints = res.depleteResource();
+
+            GameManager.manager.AddResources(resPoints, team);
+            Destroy(gameObject);
+            return;
+        }
     }
 }
