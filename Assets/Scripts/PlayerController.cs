@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour , IDamageable
+public class PlayerController : MonoBehaviour, IDamageable
 {
     public enum Mode
     {
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour , IDamageable
 
     private void UpdateVisuals()
     {
-        if(matChangers == null)
+        if (matChangers == null)
         {
             matChangers = GetComponentsInChildren<TeamMatChanger>();
         }
@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour , IDamageable
     {
         Vector3 directionOfShoot = thisTransform.forward;
         GameObject bullet = Instantiate(bulletPrefab, transform.position + (directionOfShoot), Quaternion.identity);
-        Vector3 targetPoint = new Vector3(inputs.lookPos.x, thisTransform.position.y , inputs.lookPos.z);
+        Vector3 targetPoint = new Vector3(inputs.lookPos.x, thisTransform.position.y, inputs.lookPos.z);
         var script = bullet.GetComponent<BulletScript>();
         script.targetPoint = targetPoint;
         script.team = GetTeam();
@@ -110,8 +110,37 @@ public class PlayerController : MonoBehaviour , IDamageable
 
         if (inputs.buildMode)
         {
-            SpawnButtonController.spawner.OpenBuild();
-            inputs.buildMode = false;
+            if (team == Teams.Team.PLAYER)
+            {
+                SpawnButtonController.spawner.OpenBuild();
+                inputs.buildMode = false;
+            }
+            else if (team == Teams.Team.AI)
+            {
+                SpawnButtonController.spawner.PlayerEnterMode(Mode.BUILD, Teams.Team.AI);
+                AIBuild(inputs.desiredBuilding,inputs.lookPos,inputs.buildingEuler);
+                inputs.buildMode = false;
+                SpawnButtonController.spawner.PlayerEnterMode(Mode.GAME, Teams.Team.AI);
+                PlayerData myPlayer = GameManager.manager.GetPlayer(Teams.Team.AI);
+                if (inputs.desiredBuilding == BuildingType.BARRACKS)
+                {
+                    myPlayer.resources -= 50;
+                }
+                if(inputs.desiredBuilding == BuildingType.TOWER)
+                    {
+                    myPlayer.resources -= 25;
+                }
+            }
+
+        }
+    }
+
+    public void AIBuild(BuildingType type, Vector3 pos, Vector3 angles)
+    {
+        if (type == BuildingType.BARRACKS || type == BuildingType.TOWER)
+        {
+            GameObject desiredPrefab = BuildingInfo.inf.GetPrefab(type);
+            SpawnButtonController.spawner.SpawnBuilding(desiredPrefab, team, pos, angles);
         }
     }
 

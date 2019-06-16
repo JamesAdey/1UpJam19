@@ -26,7 +26,7 @@ public class CB_WizardResources : ContextBehaviour<float>
         float desire = 3;
         if (myPlayer.resources > 0)
         {
-            desire = (enemyPlayer.resources + 10) / myPlayer.resources;
+            desire = (enemyPlayer.resources + 50) / myPlayer.resources;
         }
 
 
@@ -47,6 +47,10 @@ public class CB_WizardResources : ContextBehaviour<float>
 
         foreach (var res in GameManager.manager.resources)
         {
+            if (res.capacity <= 0)
+            {
+                continue;
+            }
             Vector3 resourcePos = res.thisTransform.position;
             MarkLookMap(resourcePos);
             moveHighest = MarkMovementMap(currentPos, resourcePos, moveHighest);

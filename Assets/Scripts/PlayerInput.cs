@@ -14,5 +14,5 @@ public class PlayerInput
     public bool buildMode;
     public Vector3 buildingEuler;
     public bool escape;
-    
+    public BuildingType desiredBuilding;
 }
