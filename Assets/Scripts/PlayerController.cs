@@ -64,7 +64,9 @@ public class PlayerController : MonoBehaviour , IDamageable
         Vector3 directionOfShoot = thisTransform.forward;
         GameObject bullet = Instantiate(bulletPrefab, transform.position + (directionOfShoot), Quaternion.identity);
         Vector3 targetPoint = new Vector3(inputs.lookPos.x, thisTransform.position.y , inputs.lookPos.z);
-        bullet.GetComponent<BulletScript>().targetPoint = targetPoint;
+        var script = bullet.GetComponent<BulletScript>();
+        script.targetPoint = targetPoint;
+        script.team = GetTeam();
     }
 
     private void FixedUpdate()

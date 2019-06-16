@@ -12,6 +12,7 @@ public class BotBrain : BaseBrain
     KeypressCMap keyboardMap = new KeypressCMap();
     LookPosCMap lookMap = new LookPosCMap();
     CB_WizardAttack attackBehaviour = new CB_WizardAttack();
+    CB_WizardResources resourceBehaviour = new CB_WizardResources();
 
     private Transform thisTransform;
     public Vector3 moveDir;
@@ -50,6 +51,7 @@ public class BotBrain : BaseBrain
 
         PlayerData player = GameManager.manager.GetPlayer(Teams.Team.AI);
         attackBehaviour.Process(movementMap, keyboardMap, lookMap, player.controller);
+        resourceBehaviour.Process(movementMap, keyboardMap, lookMap, player.controller);
 
         // evaluate keys
         inputs.primaryAttack = keyboardMap.GetKeyPress(BotKeys.PRIMARY_ATTACK);
