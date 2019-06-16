@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         health.parentTransform = thisTransform;
         health.maxHealth = 300;
         UpdateVisuals();
+
     }
 
     private void UpdateVisuals()
