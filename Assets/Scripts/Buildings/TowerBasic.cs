@@ -86,6 +86,7 @@ public class TowerBasic : BaseBuilding
 
     public override float GetAttackRange()
     {
+        print("TOWER RANGE " + range);
         return range;
     }
 }

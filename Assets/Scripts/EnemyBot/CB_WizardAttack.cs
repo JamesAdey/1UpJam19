@@ -9,6 +9,7 @@ public class CB_WizardAttack : ContextBehaviour<float>
     List<Vector3> moveDirections = new List<Vector3>();
     List<Vector3> lookDirections = new List<Vector3>();
     List<float> moveWeights = new List<float>();
+    List<float> extraWeights = new List<float>();
 
     public override void Process(ContextMap<float> map)
     {
@@ -42,16 +43,16 @@ public class CB_WizardAttack : ContextBehaviour<float>
             float sqrDist = (minion.Position - currentPos).sqrMagnitude;
             // LOOK at the minion
             MarkLookMap(minion.Position);
-            float closeSqrRange = Mathf.Min(100,sqrDist);
+            float closeSqrRange = 36;
             // possibly MOVE away from it
             if (sqrDist < closeSqrRange)
             {
-                moveHighest = MarkMovementMap(minion.Position, currentPos, moveHighest);
+                moveHighest = MarkMovementMap(minion.Position, currentPos, moveHighest, 2);
                 
             }
             else
             {
-                moveHighest = MarkMovementMap(currentPos, minion.Position, moveHighest);
+                moveHighest = MarkMovementMap(currentPos, minion.Position, moveHighest, 0);
             }
         }
 
@@ -67,11 +68,11 @@ public class CB_WizardAttack : ContextBehaviour<float>
             // possibly MOVE away from it
             if (tooClose)
             {
-                moveHighest = MarkMovementMap(building.GetPosition(), currentPos, moveHighest);
+                moveHighest = MarkMovementMap(building.GetPosition(), currentPos, moveHighest, 10);
             }
             else
             {
-                moveHighest = MarkMovementMap(currentPos, building.GetPosition(), moveHighest);
+                moveHighest = MarkMovementMap(currentPos, building.GetPosition(), moveHighest, 0);
             }
         }
 
@@ -79,6 +80,7 @@ public class CB_WizardAttack : ContextBehaviour<float>
         for (int i = 0; i < moveWeights.Count; i++)
         {
             float strength = 1.01f - (moveWeights[i] / moveHighest);
+            strength += extraWeights[i];
             movementMap.WriteDirection(moveDirections[i], strength);
             lookMap.WriteLookPos(lookDirections[i], strength);
             keyboardMap.WriteKey(BotKeys.PRIMARY_ATTACK, true, strength);
@@ -90,7 +92,7 @@ public class CB_WizardAttack : ContextBehaviour<float>
         lookDirections.Add(target);
     }
 
-    private float MarkMovementMap(Vector3 from, Vector3 to, float highest)
+    private float MarkMovementMap(Vector3 from, Vector3 to, float highest, float extraWeight)
     {
         Vector3 dir = (to - from);
         float sqrMag = dir.sqrMagnitude;
@@ -100,6 +102,7 @@ public class CB_WizardAttack : ContextBehaviour<float>
         }
         moveDirections.Add(dir);
         moveWeights.Add(sqrMag);
+        extraWeights.Add(extraWeight);
         return highest;
     }
 
