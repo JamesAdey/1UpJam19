@@ -29,8 +29,7 @@ public class BotBrain : BaseBrain
         keyboardMap.Init(2);
         lookMap.Init(1);
 
-        var prefab = BuildingInfo.inf.GetPrefab(BuildingType.BARRACKS);
-        SpawnButtonController.spawner.SpawnBuilding(prefab, Teams.Team.AI, new Vector3(-20,3,-20) , Vector3.zero);
+        SpawnButtonController.spawner.SpawnBuilding(BuildingType.BARRACKS, Teams.Team.AI, new Vector3(-20,3,-20) , Vector3.zero);
 
     }
 

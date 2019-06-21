@@ -14,7 +14,10 @@ public class Barracks : BaseBuilding
 
     private float nextSpawnTime;
 
-
+    public override BuildingType GetBuildingType()
+    {
+        return BuildingType.BARRACKS;
+    }
 
     Transform thisTransform;
     // Start is called before the first frame update

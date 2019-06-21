@@ -13,6 +13,9 @@ public abstract class BaseBuilding : MonoBehaviour , IDamageable
 
     protected HealthBar health;
 
+
+    
+
     public List<NavNode> nodes;
     public PlayerInput input;
 
@@ -22,6 +25,9 @@ public abstract class BaseBuilding : MonoBehaviour , IDamageable
     public abstract float GetAttackRange();
 
     private TeamMatChanger[] matChangers;
+    
+    public abstract BuildingType GetBuildingType();
+   
 
     protected void UpdateVisuals()
     {

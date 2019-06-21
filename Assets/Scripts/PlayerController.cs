@@ -139,8 +139,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         if (type == BuildingType.BARRACKS || type == BuildingType.TOWER)
         {
-            GameObject desiredPrefab = BuildingInfo.inf.GetPrefab(type);
-            SpawnButtonController.spawner.SpawnBuilding(desiredPrefab, team, pos, angles);
+            SpawnButtonController.spawner.SpawnBuilding(type, team, pos, angles);
         }
     }
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BuildingType { BARRACKS, TOWER, MAIN }
+public enum BuildingType { BARRACKS, TOWER, MAIN, GHOST }
 
 public class BuildingInfo : MonoBehaviour
 {

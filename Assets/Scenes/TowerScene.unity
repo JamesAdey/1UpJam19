@@ -478,6 +478,7 @@ MonoBehaviour:
   playerCanvas: {fileID: 0}
   healthBarPrefab: {fileID: 0}
   players: []
+  resources: []
   humanPlayer:
     minions: []
     buildings: []
@@ -486,6 +487,7 @@ MonoBehaviour:
     brain: {fileID: 0}
     team: 0
     material: {fileID: 0}
+    resources: 0
   endText: {fileID: 0}
   endPanel: {fileID: 0}
 --- !u!4 &1425663682

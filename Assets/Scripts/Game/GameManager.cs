@@ -76,15 +76,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject towerPrefab = BuildingInfo.inf.GetPrefab(BuildingType.MAIN);
 
         humanPlayer = CreateHumanPlayer();
         players.Add(humanPlayer);
-        SpawnButtonController.spawner.SpawnBuilding(towerPrefab, Teams.Team.PLAYER, new Vector3(0, 4, 35), Vector3.zero);
+        SpawnButtonController.spawner.SpawnBuilding(BuildingType.MAIN, Teams.Team.PLAYER, new Vector3(0, 4, 35), Vector3.zero);
 
         PlayerData botPlayer = CreateBotPlayer();
         players.Add(botPlayer);
-        SpawnButtonController.spawner.SpawnBuilding(towerPrefab, Teams.Team.AI, new Vector3(0, 4, -35), Vector3.zero);
+        SpawnButtonController.spawner.SpawnBuilding(BuildingType.MAIN, Teams.Team.AI, new Vector3(0, 4, -35), Vector3.zero);
 
 
     }
@@ -96,6 +95,8 @@ public class GameManager : MonoBehaviour
 
         // Camera stuff
         HumanBrain brain = playerObj.AddComponent<HumanBrain>();
+
+        //BotBrain brain = playerObj.AddComponent<BotBrain>()
         brain.cam = Camera.main;
         Camera.main.GetComponent<TopDownCamera>().target = playerObj.transform;
         
@@ -105,6 +106,9 @@ public class GameManager : MonoBehaviour
         data.team = Teams.Team.PLAYER;
         data.controller.team = Teams.Team.PLAYER;
         data.brain = brain;
+
+        //TEST
+        data.resources = 100;
 
         GameObject healthBar = Instantiate(healthBarPrefab, playerCanvas.transform);
 
@@ -119,9 +123,11 @@ public class GameManager : MonoBehaviour
     {
         PlayerData data = new PlayerData();
         GameObject playerObj = Instantiate(playerPrefab, new Vector3(0, 10, -10), Quaternion.identity);
-        
+
         // BRAAAAINS!
-        BotBrain brain = playerObj.AddComponent<BotBrain>();
+        //BotBrain brain = playerObj.AddComponent<BotBrain>();
+
+        AltBotBrain brain = playerObj.AddComponent<AltBotBrain>();
 
         // Fill in the fields
         data.controller = playerObj.GetComponent<PlayerController>();

@@ -49,6 +49,7 @@ public class HealthBar : MonoBehaviour
     public void inflictDamange(float damage)
     {
         myHealth -= damage;
+        myHealth = Mathf.Clamp(myHealth, 0, maxHealth);
     }
 
     public bool isDead()

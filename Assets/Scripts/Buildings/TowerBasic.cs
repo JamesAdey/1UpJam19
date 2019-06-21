@@ -21,6 +21,11 @@ public class TowerBasic : BaseBuilding
 
     Transform thisTransform;
 
+    public override BuildingType GetBuildingType()
+    {
+        return BuildingType.TOWER;
+    }
+
     public void Awake()
     {
         blockingRadius = 4.5f;

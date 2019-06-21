@@ -43,9 +43,9 @@ public class SpawnButtonController : MonoBehaviour
         ghost.GetComponent<BaseBuilding>().SnapToMouse();
     }
 
-    public void SpawnBuilding(GameObject prefab, Teams.Team team, Vector3 position, Vector3 eulerAngle)
+    public void SpawnBuilding(BuildingType type, Teams.Team team, Vector3 position, Vector3 eulerAngle)
     {
-        GameObject building = Instantiate(prefab, position, Quaternion.Euler(eulerAngle));
+        GameObject building = Instantiate(BuildingInfo.inf.GetPrefab(type), position, Quaternion.Euler(eulerAngle));
         PlayerData data = GameManager.manager.GetPlayer(team);
         building.GetComponent<BaseBuilding>().input = data.brain.GetInputs();
         building.GetComponent<BaseBuilding>().team = team;

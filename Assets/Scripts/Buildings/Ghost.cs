@@ -126,4 +126,9 @@ public class Ghost : BaseBuilding
     {
         return 0;
     }
+
+    public override BuildingType GetBuildingType()
+    {
+        return BuildingType.GHOST;
+    }
 }

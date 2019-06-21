@@ -7,6 +7,10 @@ public class MainTower : BaseBuilding
 
     Transform thisTransform;
 
+    public override BuildingType GetBuildingType()
+    {
+        return BuildingType.MAIN;
+    }
 
     public override Vector3 GetPosition()
     {
