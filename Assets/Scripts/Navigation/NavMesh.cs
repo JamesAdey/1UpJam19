@@ -8,6 +8,9 @@ public class NavMesh : MonoBehaviour
 {
     List<NavNode> nodes = new List<NavNode>();
 
+    [SerializeField]
+    List<NavNode> defaultNodes = new List<NavNode>();
+
     public static NavMesh singleton;
 
     private void Awake()
@@ -16,6 +19,11 @@ public class NavMesh : MonoBehaviour
         {
             singleton = this;
         }
+    }
+
+    private void Start()
+    {
+        StitchNodes(defaultNodes);
     }
 
     private void OnDestroy()
