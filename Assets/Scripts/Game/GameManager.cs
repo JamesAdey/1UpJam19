@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
 
+        
         humanPlayer = CreateHumanPlayer();
         players.Add(humanPlayer);
         SpawnButtonController.spawner.SpawnBuilding(BuildingType.MAIN, Teams.Team.PLAYER, new Vector3(0, 4, 35), Vector3.zero);

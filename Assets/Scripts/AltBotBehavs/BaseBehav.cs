@@ -9,7 +9,7 @@ public abstract class BaseBehav
     public BaseBehav(PlayerInput inputs, Transform playerTrans, Teams.Team team)
     {
         this.inputs = inputs;
-        this.playerTrans = playerTrans;
+        this.myTransform = playerTrans;
         this.enemyPlayer = GameManager.manager.GetOpposingPlayer(team);
         this.myPlayer = GameManager.manager.GetPlayer(team);
         this.team = team;
@@ -23,7 +23,7 @@ public abstract class BaseBehav
 
     protected PlayerInput inputs;
 
-    protected Transform playerTrans;
+    protected Transform myTransform;
 
     public abstract void Think();
 }
