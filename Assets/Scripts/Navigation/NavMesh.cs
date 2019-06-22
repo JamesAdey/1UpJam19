@@ -42,15 +42,24 @@ public class NavMesh : MonoBehaviour
             node.ResetPathingData();
         }
         NavNode startNode = NearestNodeTo(from);
+        //Debug.Log("Start " + startNode.Position);
         NavNode endNode = NearestNodeTo(to);
+
+        if(endNode == null || startNode == null)
+        {
+            return null;
+        }
+        //Debug.Log("End " + endNode.Position);
 
         List<NavNode> openList = new List<NavNode>();
         openList.Add(startNode);
+
         startNode.isUnseen = false;
 
-        while (!endNode.isUnseen)
-        {
+        bool pathFound = false;
 
+        while (endNode.isUnseen && openList.Count > 0)
+        {
             NavNode current = openList[0];
             openList.RemoveAt(0);
 
@@ -58,20 +67,37 @@ public class NavMesh : MonoBehaviour
             {
                 if (node.isUnseen)
                 {
+                    //Debug.Log("Expanding " + node.Position + " with parent " + current.Position);
                     openList.Add(node);
                     node.isUnseen = false;
                     node.parentNode = current;
+
+                    if (!endNode.isUnseen)
+                    {
+                        pathFound = true;
+                    }
                 }
             }
         }
 
+        if (!pathFound)
+        {
+            return null;
+        }
+
         NavNode next = endNode;
         List<Vector3> path = new List<Vector3>();
+        path.Add(to);
+        
         while (next != null)
         {
             path.Add(next.Position);
             next = next.parentNode;
         }
+
+        path.Add(from);
+        path.Reverse();
+        
         return path;
     }
 
@@ -84,6 +110,7 @@ public class NavMesh : MonoBehaviour
             float sqrDist = (pos - node.Position).sqrMagnitude;
             if (sqrDist < shortest)
             {
+                
                 if (Physics.Linecast(pos, node.Position))
                 {
                     continue;   // skip if obscured
