@@ -46,6 +46,10 @@ MonoBehaviour:
   neighbours:
   - {fileID: 581575401}
   - {fileID: 477936764}
+  isClosed: 0
+  isUnseen: 0
+  distToGoal: 0
+  parentNode: {fileID: 0}
 --- !u!1 &477936763
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +96,10 @@ MonoBehaviour:
   neighbours:
   - {fileID: 671747010}
   - {fileID: 236305329}
+  isClosed: 0
+  isUnseen: 0
+  distToGoal: 0
+  parentNode: {fileID: 0}
 --- !u!1 &581575400
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,6 +146,10 @@ MonoBehaviour:
   neighbours:
   - {fileID: 671747010}
   - {fileID: 236305329}
+  isClosed: 0
+  isUnseen: 0
+  distToGoal: 0
+  parentNode: {fileID: 0}
 --- !u!1 &671747008
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,6 +196,10 @@ MonoBehaviour:
   neighbours:
   - {fileID: 581575401}
   - {fileID: 477936764}
+  isClosed: 0
+  isUnseen: 0
+  distToGoal: 0
+  parentNode: {fileID: 0}
 --- !u!1 &5830228954015435707
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,6 +466,8 @@ MonoBehaviour:
     primaryAttack: 0
     buildMode: 0
     buildingEuler: {x: 0, y: 0, z: 0}
+    escape: 0
+    desiredBuilding: 0
   team: 0
   bulletPrefab: {fileID: 7563192733671129351, guid: f5198efe543f6b245bd54f911ad3aae7,
     type: 3}

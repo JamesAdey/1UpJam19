@@ -49,7 +49,7 @@ public class BulletScript : MonoBehaviour
         IDamageable obj = collision.gameObject.GetComponentInParent<IDamageable>();
         if(obj != null)
         {
-            Debug.Log(collision.gameObject.name);
+            //Debug.Log(collision.gameObject.name);
             damageInf.damage = damage;
             obj.TakeDamage(damageInf);
         }

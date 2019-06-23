@@ -17,12 +17,16 @@ public class Resource : MonoBehaviour
 
     public Transform thisTransform;
 
+    public List<NavNode> nodes;
+
     private void Start()
     {
         maxCap = capacity;
         thisTransform = GetComponent<Transform>();
         thisRenderer = GetComponentInChildren<GhostRenderer>();
         GameManager.manager.resources.Add(this);
+        NavMesh.singleton.StitchNodes(nodes);
+
     }
 
     private void Update()

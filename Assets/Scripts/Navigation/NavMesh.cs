@@ -44,12 +44,12 @@ public class NavMesh : MonoBehaviour
         NavNode startNode = NearestNodeTo(from);
         //Debug.Log("Start " + startNode.Position);
         NavNode endNode = NearestNodeTo(to);
+        //Debug.Log("End " + endNode.Position);
 
-        if(endNode == null || startNode == null)
+        if (endNode == null || startNode == null)
         {
             return null;
         }
-        //Debug.Log("End " + endNode.Position);
 
         List<NavNode> openList = new List<NavNode>();
         openList.Add(startNode);
@@ -65,7 +65,7 @@ public class NavMesh : MonoBehaviour
 
             foreach (NavNode node in current.neighbours)
             {
-                if (node.isUnseen)
+                if (node.isUnseen && CheckReachable(current.Position, node.Position, "none"))
                 {
                     //Debug.Log("Expanding " + node.Position + " with parent " + current.Position);
                     openList.Add(node);
@@ -120,6 +120,19 @@ public class NavMesh : MonoBehaviour
             }
         }
         return closest;
+    }
+
+    public static bool CheckReachable(Vector3 node1, Vector3 node2, string avoidTag)
+    {
+        if (Physics.Linecast(node1, node2, out RaycastHit info))
+        {
+            if (!info.collider.CompareTag("bridge") && !info.collider.name.Equals("Player(Clone)"))
+            {
+                Debug.Log("fail " + avoidTag);
+                return false;
+            }
+        }
+        return true;
     }
 
     public void StitchNodes(List<NavNode> newNodes)
