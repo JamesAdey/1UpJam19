@@ -65,7 +65,7 @@ public class NavMesh : MonoBehaviour
 
             foreach (NavNode node in current.neighbours)
             {
-                if (node.isUnseen && CheckReachable(current.Position, node.Position, "none"))
+                if (node.isUnseen && CheckReachable(current.Position, node.Position))
                 {
                     //Debug.Log("Expanding " + node.Position + " with parent " + current.Position);
                     openList.Add(node);
@@ -122,13 +122,12 @@ public class NavMesh : MonoBehaviour
         return closest;
     }
 
-    public static bool CheckReachable(Vector3 node1, Vector3 node2, string avoidTag)
+    public static bool CheckReachable(Vector3 node1, Vector3 node2)
     {
         if (Physics.Linecast(node1, node2, out RaycastHit info))
         {
             if (!info.collider.CompareTag("bridge") && !info.collider.name.Equals("Player(Clone)"))
             {
-                Debug.Log("fail " + avoidTag);
                 return false;
             }
         }
