@@ -1,1 +1,3 @@
-# 1UpJam19
+# 1UpJam19 - Wizard Duel!
+
+Defeat the enemy Wizard!
