@@ -35,7 +35,7 @@ public class MoveBehav : BaseBehav
                 if(bestScore < 100)
                 {
                     bestScore = 100;
-                    bestTarget = new Vector3(-building.GetPosition().x, building.GetPosition().y, -building.GetPosition().z);
+                    bestTarget = GameManager.manager.GetPlayer(team).mainTower.GetPosition();
                 }
             }
 
