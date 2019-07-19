@@ -28,10 +28,12 @@ public class RouteFollower
     public void SetNewDestination(Vector3 dest)
     {
         currentDest = dest;
+
         List<Vector3> path = NavMesh.singleton.FindPath(myTransform.position, currentDest);
 
         if (path != null)
         {
+            Debug.Log("path found");
             onRoute = true;
             currentPath = path;
 
@@ -44,6 +46,8 @@ public class RouteFollower
 
             moveToNextNode();
         }
+
+        Debug.Log("ERROR: no path found");
     }
 
     private void moveToNextNode()
